@@ -1,7 +1,90 @@
+// Dark Theme Colors - Improved Readability
+$dark-bg-primary: #0f0f0f;
+$dark-bg-secondary: #1a1a1a;
+$dark-bg-tertiary: #262626;
+$dark-text-primary: #ffffff;
+$dark-text-secondary: #e5e5e5;
+$dark-text-muted: #a3a3a3;
+$dark-text-subtle: #737373;
+$dark-border: #404040;
+$dark-border-light: #525252;
+$dark-accent: #6366f1;
+$dark-accent-hover: #4f46e5;
+$dark-success: #22c55e;
+$dark-warning: #f59e0b;
+$dark-danger: #ef4444;
+$dark-info: #3b82f6;
+
 // Body
-$body-bg: #f8fafc;
+$body-bg: $dark-bg-primary;
+$body-color: $dark-text-primary;
 
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+// Cards
+$card-bg: $dark-bg-secondary;
+$card-border-color: $dark-border;
+
+// Navbar
+$navbar-dark-bg: $dark-bg-secondary;
+$navbar-dark-color: $dark-text-primary;
+$navbar-dark-hover-color: $dark-accent;
+$navbar-dark-active-color: $dark-accent;
+
+// Forms
+$input-bg: $dark-bg-tertiary;
+$input-color: $dark-text-primary;
+$input-border-color: $dark-border;
+$input-focus-bg: $dark-bg-tertiary;
+$input-focus-border-color: $dark-accent;
+
+// Buttons
+$btn-primary-bg: $dark-accent;
+$btn-primary-border-color: $dark-accent;
+$btn-primary-hover-bg: $dark-accent-hover;
+$btn-primary-hover-border-color: $dark-accent-hover;
+
+// Alerts
+$alert-bg-level: -10;
+$alert-border-level: -9;
+$alert-color-level: 6;
+
+// Body
+$body-bg: $dark-bg-primary;
+$body-color: $dark-text-primary;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Cards
+$card-bg: $dark-bg-secondary;
+$card-border-color: $dark-border;
+
+// Navbar
+$navbar-dark-bg: $dark-bg-secondary;
+$navbar-dark-color: $dark-text-primary;
+$navbar-dark-hover-color: $dark-accent;
+$navbar-dark-active-color: $dark-accent;
+
+// Forms
+$input-bg: $dark-bg-tertiary;
+$input-color: $dark-text-primary;
+$input-border-color: $dark-border;
+$input-focus-bg: $dark-bg-tertiary;
+$input-focus-border-color: $dark-accent;
+
+// Buttons
+$btn-primary-bg: $dark-accent;
+$btn-primary-border-color: $dark-accent;
+$btn-primary-hover-bg: $dark-accent-hover;
+$btn-primary-hover-border-color: $dark-accent-hover;
+
+// Alerts
+$alert-bg-level: -10;
+$alert-border-level: -9;
+$alert-color-level: 6;

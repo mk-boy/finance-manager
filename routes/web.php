@@ -8,14 +8,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', function () {
-    return redirect('/profile');
-})->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'editView'])->name('profile.edit');
 Route::post('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
-
-Route::get('/test', function () {
-    ;
-});
