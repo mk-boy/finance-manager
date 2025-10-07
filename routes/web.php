@@ -15,3 +15,7 @@ Route::get('/home', function () {
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'editView'])->name('profile.edit');
 Route::post('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+
+Route::get('/test', function () {
+    ;
+});
