@@ -1,7 +1,7 @@
 # 💰 Finance Manager
 
 [![Версия PHP](https://img.shields.io/badge/PHP-8.3+-blue.svg)](https://php.net)
-[![Версия Laravel](https://img.shields.io/badge/Laravel-11-red.svg)](https://laravel.com)
+[![Версия Laravel](https://img.shields.io/badge/Laravel-12-red.svg)](https://laravel.com)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)](https://postgresql.org)
 [![Redis](https://img.shields.io/badge/Redis-Кэширование-orange.svg)](https://redis.io)
 [![Docker](https://img.shields.io/badge/Docker-Поддержка-blue.svg)](https://docker.com)
@@ -84,5 +84,3 @@
 - **Tailwind CSS** - утилитарный CSS фреймворк
 - **JavaScript** (Vanilla) для интерактивности
 - **Chart.js** для построения графиков и диаграмм
-
-## 📁 Структура проекта
