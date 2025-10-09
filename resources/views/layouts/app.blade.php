@@ -83,24 +83,59 @@
         .text-light {
             color: #e5e5e5 !important;
         }
+        
+        /* Bootstrap Alert Dark Theme */
+        .alert-success {
+            background-color: rgba(34, 197, 94, 0.1);
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+        
+        .alert-danger {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        
+        .alert-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+        
+        .alert-info {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+        
+        .btn-close {
+            filter: invert(1);
+        }
     </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-lg">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <i class="fas fa-chart-line me-2"></i>
+                <a class="navbar-brand d-flex align-items-center fw-bold" href="{{ url('/') }}">
+                    <i class="fas fa-chart-line me-2 text-primary"></i>
                     FinanceManager
                 </a>
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         @auth
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('payments') }}">
+                                    <i class="fas fa-credit-card me-1"></i>
+                                    Счета
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center" href="{{ route('profile') }}">
                                     <i class="fas fa-user me-1"></i>
@@ -109,52 +144,48 @@
                             </li>
                         @endauth
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
+                    
+                    <ul class="navbar-nav">
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-outline-primary me-2 px-3" href="{{ route('login') }}">
+                                <li class="nav-item me-2">
+                                    <a class="btn btn-outline-light" href="{{ route('login') }}">
                                         <i class="fas fa-sign-in-alt me-1"></i>
-                                        {{ __('Войти') }}
+                                        Войти
                                     </a>
                                 </li>
                             @endif
-
+                            
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary px-3" href="{{ route('register') }}">
+                                    <a class="btn btn-primary" href="{{ route('register') }}">
                                         <i class="fas fa-user-plus me-1"></i>
-                                        {{ __('Регистрация') }}
+                                        Регистрация
                                     </a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-user-circle me-2"></i>
                                     {{ Auth::user()->name }}
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}">
-                                        <i class="fas fa-user me-2"></i>
-                                        Профиль
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt me-2"></i>
-                                        {{ __('Выйти') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}">
+                                            <i class="fas fa-user me-2"></i>
+                                            Профиль
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-sign-out-alt me-2"></i>
+                                            Выйти
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         @endguest
                     </ul>
@@ -162,7 +193,7 @@
             </div>
         </nav>
 
-        <main class="py-5">
+        <main class="py-4">
             @yield('content')
         </main>
     </div>

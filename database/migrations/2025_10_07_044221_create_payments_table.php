@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('type_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('current_balance')->default(0);
             $table->timestamps();
+        });
+
+        Schema::table('payments', function (Blueprint $table) {
+            $table->index('user_id');
         });
     }
 
@@ -25,6 +30,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('payments', function (Blueprint $table) {
+            $table->dropIndex(['user_id']);
+        });
+        
         Schema::dropIfExists('payments');
     }
 };

@@ -3,42 +3,56 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
+        <div class="col-lg-6">
+            <div class="card bg-dark border-secondary">
+                <div class="card-header bg-secondary">
+                    <h3 class="text-white mb-0">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        {{ __('Confirm Password') }}
+                    </h3>
+                </div>
 
                 <div class="card-body">
-                    {{ __('Please confirm your password before continuing.') }}
+                    <div class="text-center mb-4">
+                        <i class="fas fa-lock text-warning fs-1 mb-3"></i>
+                        <p class="text-light">{{ __('Please confirm your password before continuing.') }}</p>
+                    </div>
 
                     <form method="POST" action="{{ route('password.confirm') }}">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                        <div class="mb-4">
+                            <label for="password" class="form-label text-white">
+                                <i class="fas fa-key me-2"></i>
+                                {{ __('Password') }}
+                            </label>
+                            <input id="password" 
+                                   type="password" 
+                                   class="form-control bg-secondary border-secondary text-white @error('password') is-invalid @enderror" 
+                                   name="password" 
+                                   required 
+                                   autocomplete="current-password">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Confirm Password') }}
-                                </button>
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-check me-2"></i>
+                                {{ __('Confirm Password') }}
+                            </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-outline-light" href="{{ route('password.request') }}">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
                         </div>
                     </form>
                 </div>

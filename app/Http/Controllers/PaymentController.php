@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Auth;
+use Illuminate\Http\Request;
+use App\Models\Payment;
+
+class PaymentController extends Controller
+{
+    public function index()
+    {
+        $user = Auth::user();
+
+        $payments = $user->payments;
+
+        return view('payments.main', [
+            'payments' => $payments
+        ]);
+    }
+
+    public function addView()
+    {
+        $user = Auth::user();
+
+        return view('payments.add', [
+            'userInfo' => $user
+        ]);
+    }
+
+    public function add(Request $request)
+    {
+        $user = Auth::user();
+
+        Payment::create([
+            'name' => $request->name,
+            'type_id' => $request->type_id,
+            'user_id' => $user->id
+        ]);
+
+        return redirect('/payments');
+    }
+
+    public function editView($payment_id)
+    {
+        $payment = Payment::find($payment_id);
+        $user = Auth::user();
+        
+        if ($user->id == $payment->user_id) {
+            return view('payments.edit', [
+                'payment' => $payment
+            ]);
+        } else {
+            return 'Нету доступа';
+        }
+    }
+
+    public function edit(Request $request)
+    {
+        $payment = Payment::find($request->payment_id);
+
+        $payment->update([
+            'name' => $request->name,
+            'type_id' => $request->type_id
+        ]);
+
+        return redirect('/payments');
+    }
+
+    public function delete(Request $request)
+    {
+        $payment = Payment::find($request->payment_id);
+
+        $payment->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Счёт успешно удалён'
+        ]);
+    }
+}
