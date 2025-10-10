@@ -8,7 +8,7 @@
                 <div class="card-header bg-secondary">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-edit me-2"></i>
-                        Редактировать платеж
+                        Редактировать счёт
                     </h3>
                 </div>
                 <div class="card-body">
@@ -18,21 +18,21 @@
                         <div class="mb-4">
                             <label for="name" class="form-label text-white">
                                 <i class="fas fa-tag me-2"></i>
-                                Название платежа
+                                Название счёта
                             </label>
                             <input type="text" 
                                    class="form-control bg-secondary border-secondary text-white" 
                                    id="name" 
                                    name="name" 
                                    value="{{ $payment->name }}"
-                                   placeholder="Введите название платежа"
+                                   placeholder="Введите название счёта"
                                    required>
                         </div>
 
                         <div class="mb-4">
                             <label for="type_id" class="form-label text-white">
                                 <i class="fas fa-list me-2"></i>
-                                Тип платежа
+                                Тип счёта
                             </label>
                             <select class="form-select bg-secondary border-secondary text-white" 
                                     id="type_id" 

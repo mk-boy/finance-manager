@@ -108,7 +108,7 @@
                                     <div class="bg-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
                                         <span class="text-primary fs-4">2</span>
                                     </div>
-                                    <h5 class="text-white">Добавьте платежи</h5>
+                                    <h5 class="text-white">Добавьте счета</h5>
                                     <p class="text-light">Создайте свои первые финансовые записи</p>
                                 </div>
                                 <div class="col-md-4 text-center mb-4">

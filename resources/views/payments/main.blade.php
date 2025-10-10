@@ -15,7 +15,7 @@
                     <div class="card-header bg-secondary d-flex justify-content-between align-items-center">
                         <h3 class="text-white mb-0">
                             <i class="fas fa-credit-card me-2"></i>
-                            Ваши платежи
+                            Ваши счета
                         </h3>
                         <a href="{{ route('payments.add') }}" class="btn btn-primary">
                             <i class="fas fa-plus me-2"></i>
@@ -82,8 +82,8 @@
                 <div class="card bg-dark border-secondary">
                     <div class="card-body text-center py-5">
                         <i class="fas fa-credit-card text-muted fs-1 mb-3"></i>
-                        <h3 class="text-white mb-3">Пока нет платежей</h3>
-                        <p class="text-light mb-4">Добавьте свой первый платеж, чтобы начать управление финансами</p>
+                        <h3 class="text-white mb-3">Пока нет счетов</h3>
+                        <p class="text-light mb-4">Добавьте свой первый счёт, чтобы начать управление финансами</p>
                         <a href="{{ route('payments.add') }}" class="btn btn-primary btn-lg">
                             <i class="fas fa-plus me-2"></i>
                             Добавить счёт
@@ -100,7 +100,7 @@
     $(document).ready(function() {
         $('.delete_btn').on('click', function () {
             let payment_id = $(this).siblings('.payment_id').val();
-            let $paymentCard = $(`.payment-${payment_id}`).closest('.col-md-6, .col-lg-4');
+            let payment = $(`.payment-${payment_id}`).closest('.col-md-6, .col-lg-4');
 
             $.ajax({
                 url: '/payments/delete',
@@ -113,33 +113,28 @@
                 },
                 success: function (response) {
                     if (response.success) {
-                        $paymentCard.fadeOut(300, function () {
+                        payment.fadeOut(300, function () {
                             $(this).remove();
                         });
                         showAlert(response.message, 'success');
                     }
                 },
                 error: function(xhr) {
-                    showAlert('Ошибка при удалении платежа', 'danger');
+                    showAlert('Ошибка при удалении счёта', 'danger');
                 }
             });
         });
 
         function showAlert(message, type) {
             let alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
-            let $alert = $('.alert');
+            let alert = $('.alert');
             
-            // Удаляем предыдущие классы
-            $alert.removeClass('alert-success alert-danger');
-            // Добавляем новый класс
-            $alert.addClass(alertClass);
-            // Устанавливаем текст
-            $alert.find('.alert-message').text(message);
+            alert.removeClass('alert-success alert-danger');
+            alert.addClass(alertClass);
+            alert.find('.alert-message').text(message);
             
-            // Показываем alert с Bootstrap анимацией
-            $alert.show().addClass('show');
+            alert.show().addClass('show');
 
-            // Автоматически скрываем через 3 секунды
             setTimeout(function () {
                 $alert.removeClass('show').fadeOut();
             }, 3000);
