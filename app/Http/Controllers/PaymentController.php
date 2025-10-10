@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Payment;
+use App\Models\Currency;
 
 class PaymentController extends Controller
 {
@@ -12,7 +13,9 @@ class PaymentController extends Controller
     {
         $user = Auth::user();
 
-        $payments = $user->payments;
+        $payments = Payment::where('user_id', $user->id)
+                           ->with('currency')
+                           ->get();
 
         return view('payments.main', [
             'payments' => $payments
@@ -22,9 +25,11 @@ class PaymentController extends Controller
     public function addView()
     {
         $user = Auth::user();
+        $currencies = Currency::all();
 
         return view('payments.add', [
-            'userInfo' => $user
+            'userInfo' => $user,
+            'currencies' => $currencies
         ]);
     }
 
@@ -35,7 +40,8 @@ class PaymentController extends Controller
         Payment::create([
             'name' => $request->name,
             'type_id' => $request->type_id,
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'currency_id' => $request->currency_id
         ]);
 
         return redirect('/payments');
@@ -44,11 +50,13 @@ class PaymentController extends Controller
     public function editView($payment_id)
     {
         $payment = Payment::find($payment_id);
+        $currencies = Currency::all();
         $user = Auth::user();
         
         if ($user->id == $payment->user_id) {
             return view('payments.edit', [
-                'payment' => $payment
+                'payment' => $payment,
+                'currencies' => $currencies
             ]);
         } else {
             return 'Нету доступа';
@@ -61,7 +69,8 @@ class PaymentController extends Controller
 
         $payment->update([
             'name' => $request->name,
-            'type_id' => $request->type_id
+            'type_id' => $request->type_id,
+            'currency_id' => $request->currency_id
         ]);
 
         return redirect('/payments');

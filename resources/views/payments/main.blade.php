@@ -58,7 +58,7 @@
                                                 @endif
                                             </div>
                                             <p class="card-text text-white fw-bold">
-                                                {{ $payment->current_balance }} ₽
+                                                {{ $payment->current_balance }} {{ $payment->currency->symbol }}
                                             </p>
                                             <div class="d-flex gap-2">
                                                 <a href="{{ route('payments.edit', $payment->id) }}" class="btn btn-primary btn-sm">

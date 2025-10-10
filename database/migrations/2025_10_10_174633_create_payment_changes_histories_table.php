@@ -28,10 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_changes_histories');
-
         Schema::table('payment_changes_histories', function (Blueprint $table) {
             $table->dropIndex(['payment_id']);
         });
+
+        Schema::dropIfExists('payment_changes_histories');
     }
 };

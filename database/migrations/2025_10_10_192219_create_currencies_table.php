@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Currency;
 
 return new class extends Migration
 {
@@ -11,18 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('type_id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('currency_id');
-            $table->unsignedBigInteger('current_balance')->default(0);
+            $table->string('symbol');
             $table->timestamps();
         });
 
         Schema::table('payments', function (Blueprint $table) {
-            $table->index('user_id');
+            $table->index('currency_id');
         });
     }
 
@@ -32,9 +30,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->dropIndex(['user_id']);
+            $table->dropIndex(['currency_id']);
         });
-        
-        Schema::dropIfExists('payments');
+
+        Schema::dropIfExists('currencies');
     }
 };

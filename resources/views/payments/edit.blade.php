@@ -48,6 +48,25 @@
                             </select>
                         </div>
 
+                        <div class="mb-4">
+                            <label for="type_id" class="form-label text-white">
+                                <i class="fas fa-list me-2"></i>
+                                Валюта счёта
+                            </label>
+                            <select class="form-select bg-secondary border-secondary text-white" 
+                                    id="currency_id" 
+                                    name="currency_id" 
+                                    required>
+                                @foreach ($currencies as $currency)
+                                    @if ($currency->id == $payment->currency_id)
+                                        <option value="{{ $currency->id }}" selected>{{ $currency->name }}</option>
+                                    @else
+                                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+
                         <input type="hidden" name="payment_id" value="{{ $payment->id }}">
 
                         <div class="d-flex gap-3">

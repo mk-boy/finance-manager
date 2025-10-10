@@ -44,6 +44,22 @@
                             </select>
                         </div>
 
+                        <div class="mb-4">
+                            <label for="type_id" class="form-label text-white">
+                                <i class="fas fa-list me-2"></i>
+                                Валюта счёта
+                            </label>
+                            <select class="form-select bg-secondary border-secondary text-white" 
+                                    id="currency_id" 
+                                    name="currency_id" 
+                                    required>
+                                <option value="" disabled selected>Выберите валюту счёта</option>
+                                @foreach ($currencies as $currency)
+                                    <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="d-flex gap-3">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save me-2"></i>

@@ -26,6 +26,11 @@ class Payment extends Model
     protected $table = 'payments';
 
     protected $fillable = [
-        'name', 'type_id', 'user_id', 'current_balance'
+        'name', 'type_id', 'user_id', 'current_balance', 'currency_id'
     ];
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
 }

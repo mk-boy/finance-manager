@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Payment;
 
 class PaymentChangesHistory extends Model
 {
@@ -18,6 +17,4 @@ class PaymentChangesHistory extends Model
     {
         return $this->belongsTo(Payment::class);
     }
-    
-    
 }
