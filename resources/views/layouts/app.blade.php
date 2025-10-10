@@ -15,104 +15,6 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    
-    <style>
-        body {
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-            min-height: 100vh;
-            color: #ffffff;
-        }
-        
-        .navbar-dark {
-            background: rgba(26, 26, 26, 0.95) !important;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #404040;
-        }
-        
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #6366f1 !important;
-        }
-        
-        .nav-link {
-            font-weight: 500;
-            color: #e5e5e5 !important;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: #6366f1 !important;
-            transform: translateY(-1px);
-        }
-        
-        .dropdown-menu {
-            background-color: #1a1a1a;
-            border: 1px solid #404040;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        }
-        
-        .dropdown-item {
-            color: #e5e5e5;
-            transition: all 0.3s ease;
-        }
-        
-        .dropdown-item:hover {
-            background-color: #262626;
-            color: #6366f1;
-        }
-        
-        main {
-            background: transparent;
-        }
-        
-        /* Improved text readability */
-        h1, h2, h3, h4, h5, h6 {
-            color: #ffffff;
-            font-weight: 600;
-        }
-        
-        p, span, div {
-            color: #e5e5e5;
-        }
-        
-        .text-muted {
-            color: #a3a3a3 !important;
-        }
-        
-        .text-light {
-            color: #e5e5e5 !important;
-        }
-        
-        /* Bootstrap Alert Dark Theme */
-        .alert-success {
-            background-color: rgba(34, 197, 94, 0.1);
-            border-color: #22c55e;
-            color: #22c55e;
-        }
-        
-        .alert-danger {
-            background-color: rgba(239, 68, 68, 0.1);
-            border-color: #ef4444;
-            color: #ef4444;
-        }
-        
-        .alert-warning {
-            background-color: rgba(245, 158, 11, 0.1);
-            border-color: #f59e0b;
-            color: #f59e0b;
-        }
-        
-        .alert-info {
-            background-color: rgba(59, 130, 246, 0.1);
-            border-color: #3b82f6;
-            color: #3b82f6;
-        }
-        
-        .btn-close {
-            filter: invert(1);
-        }
-    </style>
 </head>
 <body>
     <div id="app">
@@ -134,6 +36,12 @@
                                 <a class="nav-link d-flex align-items-center" href="{{ route('payments') }}">
                                     <i class="fas fa-credit-card me-1"></i>
                                     Счета
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('categories') }}">
+                                    <i class="fas fa-tags me-1"></i>
+                                    Категории
                                 </a>
                             </li>
                             <li class="nav-item">
