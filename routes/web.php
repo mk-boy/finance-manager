@@ -27,3 +27,10 @@ Route::post('/categories/add', [App\Http\Controllers\CategoryController::class, 
 Route::get('/categories/edit/{id}', [App\Http\Controllers\CategoryController::class, 'editView'])->middleware('auth')->name('categories.edit');
 Route::post('/categories/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name('categories.edit_post');
 Route::post('/categories/delete', [App\Http\Controllers\CategoryController::class, 'delete'])->name('categories.delete');
+
+Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index'])->middleware('auth')->name('transactions');
+Route::get('/transactions/add', [App\Http\Controllers\TransactionController::class, 'addView'])->middleware('auth')->name('transactions.add');
+Route::post('/transactions/add', [App\Http\Controllers\TransactionController::class, 'add'])->name('transactions.add');
+Route::get('/transactions/edit/{id}', [App\Http\Controllers\TransactionController::class, 'editView'])->middleware('auth')->name('transactions.edit');
+Route::post('/transactions/edit', [App\Http\Controllers\TransactionController::class, 'edit'])->name('transactions.edit');
+Route::post('/transactions/delete', [App\Http\Controllers\TransactionController::class, 'delete'])->name('transactions.delete');

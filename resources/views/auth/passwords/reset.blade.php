@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <div class="card bg-dark border-secondary">
-                <div class="card-header bg-secondary">
+                <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-key me-2"></i>
                         {{ __('Reset Password') }}
@@ -30,7 +30,7 @@
                             </label>
                             <input id="email" 
                                    type="email" 
-                                   class="form-control bg-secondary border-secondary text-white @error('email') is-invalid @enderror" 
+                                   class="form-control border-secondary text-white @error('email') is-invalid @enderror" 
                                    name="email" 
                                    value="{{ $email ?? old('email') }}" 
                                    required 
@@ -53,7 +53,7 @@
                             </label>
                             <input id="password" 
                                    type="password" 
-                                   class="form-control bg-secondary border-secondary text-white @error('password') is-invalid @enderror" 
+                                   class="form-control border-secondary text-white @error('password') is-invalid @enderror" 
                                    name="password" 
                                    required 
                                    autocomplete="new-password"
@@ -74,7 +74,7 @@
                             </label>
                             <input id="password-confirm" 
                                    type="password" 
-                                   class="form-control bg-secondary border-secondary text-white" 
+                                   class="form-control border-secondary text-white" 
                                    name="password_confirmation" 
                                    required 
                                    autocomplete="new-password"

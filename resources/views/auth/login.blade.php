@@ -27,7 +27,7 @@
                             <input 
                                 id="email" 
                                 type="email" 
-                                class="form-control bg-secondary border-secondary text-white @error('email') is-invalid @enderror" 
+                                class="form-control border-secondary text-white @error('email') is-invalid @enderror" 
                                 name="email" 
                                 value="{{ old('email') }}" 
                                 required 
@@ -52,7 +52,7 @@
                                 <input 
                                     id="password" 
                                     type="password" 
-                                    class="form-control bg-secondary border-secondary text-white @error('password') is-invalid @enderror" 
+                                    class="form-control border-secondary text-white @error('password') is-invalid @enderror" 
                                     name="password" 
                                     required 
                                     autocomplete="current-password"

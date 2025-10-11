@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card bg-dark border-secondary">
-                <div class="card-header bg-secondary">
+                <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-edit me-2"></i>
                         Редактировать категорию
@@ -18,19 +18,19 @@
                         
                         <div class="mb-3">
                             <label for="name" class="form-label text-white">Название категории</label>
-                            <input type="text" class="form-control bg-secondary border-secondary text-white" 
+                            <input type="text" class="form-control border-secondary text-white" 
                                    id="name" name="name" value="{{ $category->name }}" required>
                         </div>
                         
                         <div class="mb-3">
                             <label for="description" class="form-label text-white">Описание</label>
-                            <textarea class="form-control bg-secondary border-secondary text-white" 
+                            <textarea class="form-control border-secondary text-white" 
                                       id="description" name="description" rows="3" maxlength="255">{{ $category->description }}</textarea>
                         </div>
                         
                         <div class="mb-3">
                             <label for="type_id" class="form-label text-white">Тип категории</label>
-                            <select class="form-select bg-secondary border-secondary text-white" id="type_id" name="type_id" required>
+                            <select class="form-select border-secondary text-white" id="type_id" name="type_id" required>
                                 <option value="{{ \App\Models\Category::INCOME_TYPE_ID }}" 
                                         {{ $category->type_id == \App\Models\Category::INCOME_TYPE_ID ? 'selected' : '' }}>
                                     Доход

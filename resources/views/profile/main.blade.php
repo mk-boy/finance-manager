@@ -19,7 +19,7 @@
 
             <!-- Profile Details Card -->
             <div class="card bg-dark border-secondary mb-4">
-                <div class="card-header bg-secondary">
+                <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-info-circle me-2"></i>
                         Информация о профиле
@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <div class="card bg-secondary border-primary">
+                            <div class="card border-primary">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-id-card text-primary me-3"></i>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card bg-secondary border-info">
+                            <div class="card border-info">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-envelope text-info me-3"></i>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card bg-secondary border-success">
+                            <div class="card border-success">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-user text-success me-3"></i>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card bg-secondary border-warning">
+                            <div class="card border-warning">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-calendar-plus text-warning me-3"></i>

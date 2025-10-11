@@ -88,7 +88,7 @@
 
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-10">
-                    <div class="card bg-secondary border-primary">
+                    <div class="card border-primary">
                         <div class="card-header bg-primary">
                             <h4 class="text-white mb-0">
                                 <i class="fas fa-rocket me-2"></i>

@@ -30,7 +30,7 @@
                                 type="text" 
                                 id="name"
                                 name="name" 
-                                class="form-control bg-secondary border-secondary text-white" 
+                                class="form-control border-secondary text-white" 
                                 value="{{ $user_info->name }}"
                                 placeholder="Введите ваше имя"
                                 required
@@ -52,7 +52,7 @@
                                 type="email" 
                                 id="email"
                                 name="email" 
-                                class="form-control bg-secondary border-secondary text-white" 
+                                class="form-control border-secondary text-white" 
                                 value="{{ $user_info->email }}"
                                 placeholder="Введите ваш email"
                                 required
@@ -79,16 +79,6 @@
                 </div>
             </div>
 
-            <!-- Additional Info -->
-            <div class="alert alert-info bg-secondary border-info">
-                <div class="d-flex align-items-start">
-                    <i class="fas fa-info-circle text-info me-3 mt-1"></i>
-                    <div>
-                        <h5 class="text-white mb-2">Важная информация</h5>
-                        <p class="text-light mb-0">После изменения email адреса вам потребуется подтвердить новый адрес электронной почты.</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

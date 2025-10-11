@@ -45,6 +45,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('transactions') }}">
+                                    <i class="fas fa-exchange-alt me-1"></i>
+                                    Транзакции
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center" href="{{ route('profile') }}">
                                     <i class="fas fa-user me-1"></i>
                                     Профиль

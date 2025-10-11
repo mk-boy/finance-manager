@@ -18,28 +18,28 @@
                     @auth
                         <div class="row g-4 mt-5">
                             <div class="col-md-4">
-                                <div class="card bg-secondary border-primary h-100">
+                                <div class="card border-primary h-100">
                                     <div class="card-body text-center">
                                         <i class="fas fa-wallet text-primary fs-1 mb-3"></i>
-                                        <h3 class="text-white fw-bold">₽0</h3>
+                                        <h3 class="text-white fw-bold">₽{{ number_format($totalBalance, 0, ',', ' ') }}</h3>
                                         <p class="text-light mb-0">Общий баланс</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card bg-secondary border-success h-100">
+                                <div class="card border-success h-100">
                                     <div class="card-body text-center">
                                         <i class="fas fa-arrow-up text-success fs-1 mb-3"></i>
-                                        <h3 class="text-white fw-bold">₽0</h3>
+                                        <h3 class="text-white fw-bold">₽{{ number_format($totalIncome, 0, ',', ' ') }}</h3>
                                         <p class="text-light mb-0">Доходы</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card bg-secondary border-danger h-100">
+                                <div class="card border-danger h-100">
                                     <div class="card-body text-center">
                                         <i class="fas fa-arrow-down text-danger fs-1 mb-3"></i>
-                                        <h3 class="text-white fw-bold">₽0</h3>
+                                        <h3 class="text-white fw-bold">₽{{ number_format($totalExpense, 0, ',', ' ') }}</h3>
                                         <p class="text-light mb-0">Расходы</p>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-10">
                 <div class="card bg-dark border-secondary">
-                    <div class="card-header bg-secondary">
+                    <div class="card-header">
                         <h3 class="text-white mb-0 text-center">
                             <i class="fas fa-bolt me-2"></i>
                             Быстрые действия
@@ -76,48 +76,56 @@
                     <div class="card-body">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <div class="card bg-secondary border-primary h-100">
-                                    <div class="card-body d-flex align-items-center">
-                                        <i class="fas fa-plus text-primary fs-2 me-3"></i>
-                                        <div>
-                                            <h5 class="text-white mb-1">Добавить доход</h5>
-                                            <p class="text-light mb-0 small">Зафиксировать поступление средств</p>
+                                <a href="{{ route('transactions.add') }}" class="text-decoration-none">
+                                    <div class="card border-primary h-100">
+                                        <div class="card-body d-flex align-items-center">
+                                            <i class="fas fa-plus text-primary fs-2 me-3"></i>
+                                            <div>
+                                                <h5 class="text-white mb-1">Добавить транзакцию</h5>
+                                                <p class="text-light mb-0 small">Зафиксировать операцию</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-md-6">
-                                <div class="card bg-secondary border-danger h-100">
-                                    <div class="card-body d-flex align-items-center">
-                                        <i class="fas fa-minus text-danger fs-2 me-3"></i>
-                                        <div>
-                                            <h5 class="text-white mb-1">Добавить расход</h5>
-                                            <p class="text-light mb-0 small">Записать трату</p>
+                                <a href="{{ route('payments.add') }}" class="text-decoration-none">
+                                    <div class="card border-danger h-100">
+                                        <div class="card-body d-flex align-items-center">
+                                            <i class="fas fa-wallet text-danger fs-2 me-3"></i>
+                                            <div>
+                                                <h5 class="text-white mb-1">Добавить счет</h5>
+                                                <p class="text-light mb-0 small">Создать платежное средство</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-md-6">
-                                <div class="card bg-secondary border-info h-100">
-                                    <div class="card-body d-flex align-items-center">
-                                        <i class="fas fa-chart-pie text-info fs-2 me-3"></i>
-                                        <div>
-                                            <h5 class="text-white mb-1">Аналитика</h5>
-                                            <p class="text-light mb-0 small">Просмотр статистики</p>
+                                <a href="{{ route('transactions') }}" class="text-decoration-none">
+                                    <div class="card border-info h-100">
+                                        <div class="card-body d-flex align-items-center">
+                                            <i class="fas fa-list text-info fs-2 me-3"></i>
+                                            <div>
+                                                <h5 class="text-white mb-1">Все транзакции</h5>
+                                                <p class="text-light mb-0 small">Просмотр всех операций</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-md-6">
-                                <div class="card bg-secondary border-warning h-100">
-                                    <div class="card-body d-flex align-items-center">
-                                        <i class="fas fa-cog text-warning fs-2 me-3"></i>
-                                        <div>
-                                            <h5 class="text-white mb-1">Настройки</h5>
-                                            <p class="text-light mb-0 small">Управление профилем</p>
+                                <a href="{{ route('payments') }}" class="text-decoration-none">
+                                    <div class="card border-warning h-100">
+                                        <div class="card-body d-flex align-items-center">
+                                            <i class="fas fa-wallet text-warning fs-2 me-3"></i>
+                                            <div>
+                                                <h5 class="text-white mb-1">Платежные средства</h5>
+                                                <p class="text-light mb-0 small">Управление счетами</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -129,20 +137,53 @@
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="card bg-dark border-secondary">
-                    <div class="card-header bg-secondary">
+                    <div class="card-header">
                         <h3 class="text-white mb-0">
                             <i class="fas fa-history me-2"></i>
                             Последняя активность
                         </h3>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-info-circle text-primary fs-4 me-3"></i>
-                            <div>
-                                <p class="text-white mb-1">Добро пожаловать в FinanceManager!</p>
-                                <small class="text-light">Начните добавлять свои транзакции</small>
+                        @if($recentTransactions->count() > 0)
+                            @foreach($recentTransactions as $transaction)
+                                <div class="d-flex align-items-center mb-3 {{ !$loop->last ? 'border-bottom border-secondary pb-3' : '' }}">
+                                    <div class="me-3">
+                                        @if($transaction->type_id == \App\Models\Transaction::INCOME_TYPE_ID)
+                                            <i class="fas fa-arrow-up text-success fs-4"></i>
+                                        @else
+                                            <i class="fas fa-arrow-down text-danger fs-4"></i>
+                                        @endif
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="text-white mb-1">{{ $transaction->name }}</p>
+                                        <small class="text-light">
+                                            {{ $transaction->category->name ?? 'Без категории' }} • 
+                                            {{ $transaction->payment->name ?? 'Не указано' }} • 
+                                            {{ $transaction->created_at->format('d.m.Y H:i') }}
+                                        </small>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="fw-bold {{ $transaction->type_id == \App\Models\Transaction::INCOME_TYPE_ID ? 'text-success' : 'text-danger' }}">
+                                            {{ $transaction->type_id == \App\Models\Transaction::INCOME_TYPE_ID ? '+' : '-' }}₽{{ number_format($transaction->sum, 0, ',', ' ') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <div class="text-center mt-3">
+                                <a href="{{ route('transactions') }}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-list me-2"></i>
+                                    Показать все транзакции
+                                </a>
                             </div>
-                        </div>
+                        @else
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-info-circle text-primary fs-4 me-3"></i>
+                                <div>
+                                    <p class="text-white mb-1">Добро пожаловать в FinanceManager!</p>
+                                    <small class="text-light">Начните добавлять свои транзакции</small>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

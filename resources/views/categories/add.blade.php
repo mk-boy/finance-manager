@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card bg-dark border-secondary">
-                <div class="card-header bg-secondary">
+                <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-plus me-2"></i>
                         Добавить новую категорию
@@ -18,19 +18,19 @@
                         
                         <div class="mb-3">
                             <label for="name" class="form-label text-white">Название категории</label>
-                            <input type="text" class="form-control bg-secondary border-secondary text-white" 
+                            <input type="text" class="form-control border-secondary text-white" 
                                    id="name" name="name" required>
                         </div>
                         
                         <div class="mb-3">
                             <label for="description" class="form-label text-white">Описание</label>
-                            <textarea class="form-control bg-secondary border-secondary text-white" 
+                            <textarea class="form-control border-secondary text-white" 
                                       id="description" name="description" rows="3" maxlength="255"></textarea>
                         </div>
                         
                         <div class="mb-3">
                             <label for="type_id" class="form-label text-white">Тип категории</label>
-                            <select class="form-select bg-secondary border-secondary text-white" id="type_id" name="type_id" required>
+                            <select class="form-select border-secondary text-white" id="type_id" name="type_id" required>
                                 <option value="{{ \App\Models\Category::INCOME_TYPE_ID }}">Доход</option>
                                 <option value="{{ \App\Models\Category::EXPENSE_TYPE_ID }}">Расход</option>
                             </select>

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <div class="card bg-dark border-secondary">
-                <div class="card-header bg-secondary">
+                <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-envelope me-2"></i>
                         {{ __('Verify Your Email Address') }}
