@@ -16,7 +16,7 @@
                             <i class="fas fa-credit-card me-2"></i>
                             Ваши счета
                         </h3>
-                        <a href="{{ route('payments.add') }}" class="btn btn-primary">
+                        <a href="{{ route('payments.add') }}" class="btn btn-success">
                             <i class="fas fa-plus me-2"></i>
                             Добавить счёт
                         </a>
@@ -69,7 +69,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ route('payments.edit', $payment->id) }}" class="btn btn-primary btn-sm">
+                                                    <a href="{{ route('payments.edit', $payment->id) }}" class="btn btn-success btn-sm">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button class="btn btn-danger btn-sm delete_btn">

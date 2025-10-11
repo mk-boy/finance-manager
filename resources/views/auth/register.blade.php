@@ -125,7 +125,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                            <button type="submit" class="btn btn-success btn-lg">
                                 <i class="fas fa-user-plus me-2"></i>
                                 Зарегистрироваться
                             </button>

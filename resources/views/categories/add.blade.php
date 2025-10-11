@@ -45,7 +45,7 @@
                         </div>
                         
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-success">
                                 <i class="fas fa-save me-2"></i>
                                 Создать категорию
                             </button>

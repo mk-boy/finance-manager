@@ -16,7 +16,7 @@
                             <i class="fas fa-tags me-2"></i>
                             Ваши категории
                         </h3>
-                        <a href="{{ route('categories.add') }}" class="btn btn-primary">
+                        <a href="{{ route('categories.add') }}" class="btn btn-success">
                             <i class="fas fa-plus me-2"></i>
                             Добавить категорию
                         </a>
@@ -56,7 +56,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm">
+                                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-success btn-sm">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button class="btn btn-danger btn-sm delete_btn">

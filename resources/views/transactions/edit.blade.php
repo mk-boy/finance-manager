@@ -105,7 +105,7 @@
                         <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
 
                         <div class="d-flex gap-3">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-success">
                                 <i class="fas fa-save me-2"></i>
                                 Сохранить изменения
                             </button>

@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex">
-                            <button type="submit" class="btn btn-primary btn-lg flex-fill">
+                            <button type="submit" class="btn btn-success btn-lg flex-fill">
                                 <i class="fas fa-save me-2"></i>
                                 Сохранить изменения
                             </button>

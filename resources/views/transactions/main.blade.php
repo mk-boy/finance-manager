@@ -16,7 +16,7 @@
                             <i class="fas fa-exchange-alt me-2"></i>
                             Ваши транзакции
                         </h3>
-                        <a href="{{ route('transactions.add') }}" class="btn btn-primary">
+                        <a href="{{ route('transactions.add') }}" class="btn btn-success">
                             <i class="fas fa-plus me-2"></i>
                             Добавить транзакцию
                         </a>
@@ -69,7 +69,7 @@
                                             <td class="text-light">{{ $transaction->created_at->format('d.m.Y H:i') }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-primary btn-sm">
+                                                    <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-success btn-sm">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button class="btn btn-danger btn-sm delete_btn">

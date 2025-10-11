@@ -20,8 +20,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center fw-bold" href="{{ url('/') }}">
-                    <i class="fas fa-chart-line me-2 text-primary"></i>
+                <a class="navbar-brand d-flex align-items-center fw-bold {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ url('/') }}">
+                    <i class="fas fa-chart-line me-2 text-success"></i>
                     FinanceManager
                 </a>
                 
@@ -33,25 +33,25 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('payments') }}">
+                                <a class="nav-link d-flex align-items-center {{ request()->routeIs('payments*') ? 'active' : '' }}" href="{{ route('payments') }}">
                                     <i class="fas fa-credit-card me-1"></i>
                                     Счета
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('categories') }}">
+                                <a class="nav-link d-flex align-items-center {{ request()->routeIs('categories*') ? 'active' : '' }}" href="{{ route('categories') }}">
                                     <i class="fas fa-tags me-1"></i>
                                     Категории
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('transactions') }}">
+                                <a class="nav-link d-flex align-items-center {{ request()->routeIs('transactions*') ? 'active' : '' }}" href="{{ route('transactions') }}">
                                     <i class="fas fa-exchange-alt me-1"></i>
                                     Транзакции
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('profile') }}">
+                                <a class="nav-link d-flex align-items-center {{ request()->routeIs('profile*') ? 'active' : '' }}" href="{{ route('profile') }}">
                                     <i class="fas fa-user me-1"></i>
                                     Профиль
                                 </a>
@@ -72,7 +72,7 @@
                             
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="btn btn-primary" href="{{ route('register') }}">
+                                    <a class="btn btn-success" href="{{ route('register') }}">
                                         <i class="fas fa-user-plus me-1"></i>
                                         Регистрация
                                     </a>
@@ -114,5 +114,32 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Navigation Styles -->
+    <style>
+        .navbar-nav .nav-link:hover {
+            color: #28a745 !important;
+        }
+        .navbar-nav .nav-link.active {
+            color: #28a745 !important;
+            font-weight: 600;
+        }
+        .navbar-brand:hover {
+            color: #28a745 !important;
+        }
+        .navbar-brand.active {
+            color: #28a745 !important;
+        }
+        .dropdown-item:hover {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        .navbar-nav .nav-link.active i {
+            color: #28a745 !important;
+        }
+        .navbar-brand.active i {
+            color: #28a745 !important;
+        }
+    </style>
 </body>
 </html>

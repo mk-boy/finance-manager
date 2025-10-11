@@ -86,7 +86,7 @@
             <!-- Profile Actions -->
             <div class="row g-3">
                 <div class="col-md-6">
-                    <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-lg w-100">
+                    <a href="{{ route('profile.edit') }}" class="btn btn-success btn-lg w-100">
                         <i class="fas fa-edit me-2"></i>
                         Редактировать профиль
                     </a>
