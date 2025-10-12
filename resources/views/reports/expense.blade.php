@@ -103,8 +103,6 @@
                 }
             });
 
-            console.log(dataArray);
-
             var data = google.visualization.arrayToDataTable(dataArray);
 
             var options = {
