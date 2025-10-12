@@ -20,9 +20,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center fw-bold {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ url('/') }}">
+                <a style="text-decoration: none;" class="text-success navbar-brand d-flex align-items-center fw-bold {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ url('/') }}">
                     <i class="fas fa-chart-line me-2 text-success"></i>
-                    FinanceManager
                 </a>
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +55,12 @@
                                     Профиль
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center {{ request()->routeIs('reports.expense*') ? 'active' : '' }}" href="{{ route('reports.expense') }}">
+                                    <i class="fas fa-money-bill-wave me-1"></i>
+                                    Траты
+                                </a>
+                            </li>
                         @endauth
                     </ul>
                     
@@ -72,7 +77,7 @@
                             
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="btn btn-success" href="{{ route('register') }}">
+                                    <a class="btn btn-outline-success" href="{{ route('register') }}">
                                         <i class="fas fa-user-plus me-1"></i>
                                         Регистрация
                                     </a>

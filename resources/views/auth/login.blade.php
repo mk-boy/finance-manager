@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
             <!-- Login Header -->
-            <div class="card bg-dark border-secondary mb-4">
+            <div class="card bg-dark mb-4">
                 <div class="card-body text-center">
                     <i class="fas fa-sign-in-alt text-primary fs-1 mb-3"></i>
                     <h1 class="text-white mb-2">Вход в систему</h1>
@@ -14,7 +14,7 @@
             </div>
 
             <!-- Login Form -->
-            <div class="card bg-dark border-secondary mb-4">
+            <div class="card bg-dark mb-4">
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -27,7 +27,7 @@
                             <input 
                                 id="email" 
                                 type="email" 
-                                class="form-control border-secondary text-white @error('email') is-invalid @enderror" 
+                                class="form-control text-white @error('email') is-invalid @enderror" 
                                 name="email" 
                                 value="{{ old('email') }}" 
                                 required 
@@ -52,7 +52,7 @@
                                 <input 
                                     id="password" 
                                     type="password" 
-                                    class="form-control border-secondary text-white @error('password') is-invalid @enderror" 
+                                    class="form-control text-white @error('password') is-invalid @enderror" 
                                     name="password" 
                                     required 
                                     autocomplete="current-password"
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-success btn-lg">
+                            <button type="submit" class="btn btn-outline-success btn-lg">
                                 <i class="fas fa-sign-in-alt me-2"></i>
                                 Войти
                             </button>
@@ -111,6 +111,9 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
 <script>
     function togglePassword() {
         const passwordInput = document.getElementById('password');

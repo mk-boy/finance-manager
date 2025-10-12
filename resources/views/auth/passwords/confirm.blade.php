@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
-            <div class="card bg-dark border-secondary">
+            <div class="card bg-dark">
                 <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-shield-alt me-2"></i>
@@ -28,7 +28,7 @@
                             </label>
                             <input id="password" 
                                    type="password" 
-                                   class="form-control border-secondary text-white @error('password') is-invalid @enderror" 
+                                   class="form-control text-white @error('password') is-invalid @enderror" 
                                    name="password" 
                                    required 
                                    autocomplete="current-password">
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="d-flex gap-3">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-outline-primary">
                                 <i class="fas fa-check me-2"></i>
                                 {{ __('Confirm Password') }}
                             </button>

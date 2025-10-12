@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <!-- Edit Profile Header -->
-            <div class="card bg-dark border-secondary mb-4">
+            <div class="card bg-dark mb-4">
                 <div class="card-body text-center">
                     <h1 class="text-white mb-2">
                         <i class="fas fa-edit me-2"></i>
@@ -16,7 +16,7 @@
             </div>
 
             <!-- Edit Profile Form -->
-            <div class="card bg-dark border-secondary mb-4">
+            <div class="card bg-dark mb-4">
                 <div class="card-body">
                     <form action="{{ route('profile.edit') }}" method="POST">
                         @csrf
@@ -30,7 +30,7 @@
                                 type="text" 
                                 id="name"
                                 name="name" 
-                                class="form-control border-secondary text-white" 
+                                class="form-control text-white" 
                                 value="{{ $user_info->name }}"
                                 placeholder="Введите ваше имя"
                                 required
@@ -52,7 +52,7 @@
                                 type="email" 
                                 id="email"
                                 name="email" 
-                                class="form-control border-secondary text-white" 
+                                class="form-control text-white" 
                                 value="{{ $user_info->email }}"
                                 placeholder="Введите ваш email"
                                 required
@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex">
-                            <button type="submit" class="btn btn-success btn-lg flex-fill">
+                            <button type="submit" class="btn btn-outline-success btn-lg flex-fill">
                                 <i class="fas fa-save me-2"></i>
                                 Сохранить изменения
                             </button>

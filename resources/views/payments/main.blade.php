@@ -10,20 +10,20 @@
             </div>
 
             @if (!empty($payments))
-                <div class="card bg-dark border-secondary mb-4">
+                <div class="card bg-dark mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="text-white mb-0">
                             <i class="fas fa-credit-card me-2"></i>
                             Ваши счета
                         </h3>
-                        <a href="{{ route('payments.add') }}" class="btn btn-success">
+                        <a href="{{ route('payments.add') }}" class="btn btn-outline-success">
                             <i class="fas fa-plus me-2"></i>
                             Добавить счёт
                         </a>
                     </div>
                     <div class="card-body p-3">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover mb-0">
+                            <table class="table table-striped table-hover mb-0 table-dark">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-light border-0">Название</th>
@@ -69,10 +69,10 @@
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ route('payments.edit', $payment->id) }}" class="btn btn-success btn-sm">
+                                                    <a href="{{ route('payments.edit', $payment->id) }}" class="btn btn-outline-success btn-sm">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button class="btn btn-danger btn-sm delete_btn">
+                                                    <button class="btn btn-outline-danger btn-sm delete_btn">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                     <input type="hidden" class="payment_id" value="{{ $payment->id }}">
@@ -86,12 +86,12 @@
                     </div>
                 </div>
             @else
-                <div class="card bg-dark border-secondary">
+                <div class="card bg-dark">
                     <div class="card-body text-center py-5">
                         <i class="fas fa-credit-card text-muted fs-1 mb-3"></i>
                         <h3 class="text-white mb-3">Пока нет счетов</h3>
                         <p class="text-light mb-4">Добавьте свой первый счёт, чтобы начать управление финансами</p>
-                        <a href="{{ route('payments.add') }}" class="btn btn-primary btn-lg">
+                        <a href="{{ route('payments.add') }}" class="btn btn-outline-primary btn-lg">
                             <i class="fas fa-plus me-2"></i>
                             Добавить счёт
                         </a>
@@ -102,6 +102,9 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function() {

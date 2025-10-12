@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card bg-dark border-secondary">
+            <div class="card bg-dark">
                 <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-edit me-2"></i>
@@ -21,7 +21,7 @@
                                 Название счёта
                             </label>
                             <input type="text" 
-                                   class="form-control border-secondary text-white" 
+                                   class="form-control text-white" 
                                    id="name" 
                                    name="name" 
                                    value="{{ $payment->name }}"
@@ -34,7 +34,7 @@
                                 <i class="fas fa-list me-2"></i>
                                 Тип счёта
                             </label>
-                            <select class="form-select border-secondary text-white" 
+                            <select class="form-select text-white" 
                                     id="type_id" 
                                     name="type_id" 
                                     required>
@@ -53,7 +53,7 @@
                                 <i class="fas fa-list me-2"></i>
                                 Валюта счёта
                             </label>
-                            <select class="form-select border-secondary text-white" 
+                            <select class="form-select text-white" 
                                     id="currency_id" 
                                     name="currency_id" 
                                     required>
@@ -70,7 +70,7 @@
                         <input type="hidden" name="payment_id" value="{{ $payment->id }}">
 
                         <div class="d-flex gap-3">
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-outline-success">
                                 <i class="fas fa-save me-2"></i>
                                 Сохранить изменения
                             </button>

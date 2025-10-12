@@ -16,7 +16,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="card bg-dark border-secondary shadow-lg">
+                    <div class="card bg-dark shadow-lg">
                         <div class="card-body p-5">
                             <div class="row">
                                 <div class="col-md-6">
@@ -63,12 +63,12 @@
                             <div class="text-center mt-5">
                                 @if (Route::has('login'))
                                     @auth
-                                        <a href="{{ url('/home') }}" class="btn btn-primary btn-lg me-3">
+                                        <a href="{{ url('/home') }}" class="btn btn-outline-primary btn-lg me-3">
                                             <i class="fas fa-home me-2"></i>
                                             Перейти в приложение
                                         </a>
         @else
-                                        <a href="{{ route('login') }}" class="btn btn-primary btn-lg me-3">
+                                        <a href="{{ route('login') }}" class="btn btn-outline-primary btn-lg me-3">
                                             <i class="fas fa-sign-in-alt me-2"></i>
                                             Войти
                                         </a>
@@ -88,7 +88,7 @@
 
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-10">
-                    <div class="card border-primary">
+                    <div class="card border-primary bg-dark">
                         <div class="card-header bg-primary">
                             <h4 class="text-white mb-0">
                                 <i class="fas fa-rocket me-2"></i>

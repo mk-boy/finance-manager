@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
-            <div class="card bg-dark border-secondary">
+            <div class="card bg-dark">
                 <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-envelope me-2"></i>
@@ -29,7 +29,7 @@
                         <p class="text-light mb-3">{{ __('If you did not receive the email') }}</p>
                         <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                             @csrf
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-outline-primary">
                                 <i class="fas fa-paper-plane me-2"></i>
                                 {{ __('click here to request another') }}
                             </button>

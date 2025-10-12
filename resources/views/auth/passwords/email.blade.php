@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
-            <div class="card bg-dark border-secondary">
+            <div class="card bg-dark">
                 <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-key me-2"></i>
@@ -35,7 +35,7 @@
                             </label>
                             <input id="email" 
                                    type="email" 
-                                   class="form-control border-secondary text-white @error('email') is-invalid @enderror" 
+                                   class="form-control text-white @error('email') is-invalid @enderror" 
                                    name="email" 
                                    value="{{ old('email') }}" 
                                    required 
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="d-flex gap-3">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-outline-primary">
                                 <i class="fas fa-paper-plane me-2"></i>
                                 {{ __('Send Password Reset Link') }}
                             </button>

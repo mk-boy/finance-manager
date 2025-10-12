@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card bg-dark border-secondary">
+            <div class="card bg-dark">
                 <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-edit me-2"></i>
@@ -21,7 +21,7 @@
                                 Название транзакции
                             </label>
                             <input type="text" 
-                                   class="form-control border-secondary text-white" 
+                                   class="form-control text-white" 
                                    id="name" 
                                    name="name" 
                                    value="{{ $transaction->name }}"
@@ -34,7 +34,7 @@
                                 <i class="fas fa-list me-2"></i>
                                 Тип транзакции
                             </label>
-                            <select class="form-select border-secondary text-white" 
+                            <select class="form-select text-white" 
                                     id="type_id" 
                                     name="type_id" 
                                     required>
@@ -54,7 +54,7 @@
                                 Сумма
                             </label>
                             <input type="number" 
-                                   class="form-control border-secondary text-white" 
+                                   class="form-control text-white" 
                                    id="sum" 
                                    name="sum" 
                                    value="{{ $transaction->sum }}"
@@ -69,7 +69,7 @@
                                 <i class="fas fa-tags me-2"></i>
                                 Категория
                             </label>
-                            <select class="form-select border-secondary text-white" 
+                            <select class="form-select text-white" 
                                     id="category_id" 
                                     name="category_id" 
                                     required>
@@ -88,7 +88,7 @@
                                 <i class="fas fa-credit-card me-2"></i>
                                 Счёт
                             </label>
-                            <select class="form-select border-secondary text-white" 
+                            <select class="form-select text-white" 
                                     id="payment_id" 
                                     name="payment_id" 
                                     required>
@@ -105,7 +105,7 @@
                         <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
 
                         <div class="d-flex gap-3">
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-outline-success">
                                 <i class="fas fa-save me-2"></i>
                                 Сохранить изменения
                             </button>

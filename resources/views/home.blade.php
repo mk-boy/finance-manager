@@ -5,7 +5,7 @@
     <!-- Hero Section -->
     <div class="row justify-content-center mb-5">
         <div class="col-lg-10">
-            <div class="card bg-dark border-secondary text-center py-5">
+            <div class="card bg-dark text-center py-5">
                 <div class="card-body">
                     <h1 class="display-4 fw-bold text-white mb-4">
                         <i class="fas fa-chart-line text-success me-3"></i>
@@ -18,7 +18,7 @@
                     @auth
                         <div class="row g-4 mt-5">
                             <div class="col-md-4">
-                                <div class="card border-success h-100">
+                                <div class="card border-success h-100 bg-dark">
                                     <div class="card-body text-center">
                                         <i class="fas fa-wallet text-success fs-1 mb-3"></i>
                                         <h3 class="text-white fw-bold">₽{{ number_format($totalBalance, 0, ',', ' ') }}</h3>
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card border-success h-100">
+                                <div class="card border-success h-100 bg-dark">
                                     <div class="card-body text-center">
                                         <i class="fas fa-arrow-up text-success fs-1 mb-3"></i>
                                         <h3 class="text-white fw-bold">₽{{ number_format($totalIncome, 0, ',', ' ') }}</h3>
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card border-warning h-100">
+                                <div class="card border-warning h-100 bg-dark">
                                     <div class="card-body text-center">
                                         <i class="fas fa-arrow-down text-warning fs-1 mb-3"></i>
                                         <h3 class="text-white fw-bold">₽{{ number_format($totalExpense, 0, ',', ' ') }}</h3>
@@ -47,7 +47,7 @@
                         </div>
                     @else
                         <div class="d-flex justify-content-center gap-3">
-                            <a href="{{ route('login') }}" class="btn btn-success btn-lg">
+                            <a href="{{ route('login') }}" class="btn btn-outline-success btn-lg">
                                 <i class="fas fa-sign-in-alt me-2"></i>
                                 Войти
                             </a>
@@ -66,7 +66,7 @@
         <!-- Quick Actions -->
         <div class="row justify-content-center mb-5">
             <div class="col-lg-10">
-                <div class="card bg-dark border-secondary">
+                <div class="card bg-dark">
                     <div class="card-header">
                         <h3 class="text-white mb-0 text-center">
                             <i class="fas fa-bolt me-2"></i>
@@ -77,7 +77,7 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <a href="{{ route('transactions.add') }}" class="text-decoration-none">
-                                    <div class="card border-success h-100">
+                                    <div class="card border-success h-100 bg-dark">
                                         <div class="card-body d-flex align-items-center">
                                             <i class="fas fa-plus text-success fs-2 me-3"></i>
                                             <div>
@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('payments.add') }}" class="text-decoration-none">
-                                    <div class="card border-success h-100">
+                                    <div class="card border-success h-100 bg-dark">
                                         <div class="card-body d-flex align-items-center">
                                             <i class="fas fa-wallet text-success fs-2 me-3"></i>
                                             <div>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('transactions') }}" class="text-decoration-none">
-                                    <div class="card border-success h-100">
+                                    <div class="card border-success h-100 bg-dark">
                                         <div class="card-body d-flex align-items-center">
                                             <i class="fas fa-list text-success fs-2 me-3"></i>
                                             <div>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('payments') }}" class="text-decoration-none">
-                                    <div class="card border-success h-100">
+                                    <div class="card border-success h-100 bg-dark">
                                         <div class="card-body d-flex align-items-center">
                                             <i class="fas fa-wallet text-success fs-2 me-3"></i>
                                             <div>
@@ -136,7 +136,7 @@
         <!-- Recent Activity -->
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="card bg-dark border-secondary">
+                <div class="card bg-dark">
                     <div class="card-header">
                         <h3 class="text-white mb-0">
                             <i class="fas fa-history me-2"></i>
@@ -146,7 +146,7 @@
                     <div class="card-body">
                         @if($recentTransactions->count() > 0)
                             @foreach($recentTransactions as $transaction)
-                                <div class="d-flex align-items-center mb-3 {{ !$loop->last ? 'border-bottom border-secondary pb-3' : '' }}">
+                                <div class="d-flex align-items-center mb-3 {{ !$loop->last ? 'border-bottom pb-3' : '' }}">
                                     <div class="me-3">
                                         @if($transaction->type_id == \App\Models\Transaction::INCOME_TYPE_ID)
                                             <i class="fas fa-arrow-up text-success fs-4"></i>

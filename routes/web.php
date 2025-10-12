@@ -34,3 +34,5 @@ Route::post('/transactions/add', [App\Http\Controllers\TransactionController::cl
 Route::get('/transactions/edit/{id}', [App\Http\Controllers\TransactionController::class, 'editView'])->middleware('auth')->name('transactions.edit');
 Route::post('/transactions/edit', [App\Http\Controllers\TransactionController::class, 'edit'])->name('transactions.edit');
 Route::post('/transactions/delete', [App\Http\Controllers\TransactionController::class, 'delete'])->name('transactions.delete');
+
+Route::get('/reports/expense', [App\Http\Controllers\ReportController::class, 'expense'])->middleware('auth')->name('reports.expense');

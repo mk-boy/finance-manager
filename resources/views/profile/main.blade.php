@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <!-- Profile Header -->
-            <div class="card bg-dark border-secondary mb-4">
+            <div class="card bg-dark mb-4">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <i class="fas fa-user-circle text-primary fs-1 me-4"></i>
@@ -18,7 +18,7 @@
             </div>
 
             <!-- Profile Details Card -->
-            <div class="card bg-dark border-secondary mb-4">
+            <div class="card bg-dark mb-4">
                 <div class="card-header">
                     <h3 class="text-white mb-0">
                         <i class="fas fa-info-circle me-2"></i>
@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <div class="card border-primary">
+                            <div class="card border-primary bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-id-card text-primary me-3"></i>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card border-info">
+                            <div class="card border-info bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-envelope text-info me-3"></i>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card border-success">
+                            <div class="card border-success bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-user text-success me-3"></i>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card border-warning">
+                            <div class="card border-warning bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-calendar-plus text-warning me-3"></i>
@@ -85,16 +85,10 @@
 
             <!-- Profile Actions -->
             <div class="row g-3">
-                <div class="col-md-6">
-                    <a href="{{ route('profile.edit') }}" class="btn btn-success btn-lg w-100">
+                <div>
+                    <a href="{{ route('profile.edit') }}" class="btn btn-outline-success btn-lg w-100">
                         <i class="fas fa-edit me-2"></i>
                         Редактировать профиль
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <a href="#" class="btn btn-outline-secondary btn-lg w-100">
-                        <i class="fas fa-cog me-2"></i>
-                        Настройки безопасности
                     </a>
                 </div>
             </div>
