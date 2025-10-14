@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\DTO\UpdateProfileDTO;
+use App\Services\ProfileService;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProfileController extends Controller
 {
@@ -12,36 +16,31 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(): View
     {
-        $user_info = Auth::user();
+        $user_info = ProfileService::getUserProfile(Auth::user());
 
         return view('profile.main', [
             'user_info' => $user_info
         ]);
     }
 
-    public function editView()
+    public function editView(): View
     {
-        $user_info = Auth::user();
+        $user_info = ProfileService::getUserProfile(Auth::user());
 
         return view('profile.edit', [
             'user_info' => $user_info
         ]);
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, ProfileService $service): RedirectResponse
     {
-        $user = Auth::user();
+        $dto = UpdateProfileDTO::fromRequest($request, Auth::user());
+        $response = $service->updateUserProfile($dto);
 
-        $name = $request->name;
-        $email = $request->email;
-
-        $user->update([
-            'name' => $name,
-            'email' => $email
-        ]);
-
-        return redirect(route('profile'));
+        $status = $response ? 'Профиль успешно обновлен' : 'Ошибка при обновлении профиля';
+        
+        return redirect()->route('profile')->with('status', $status);
     }
 }

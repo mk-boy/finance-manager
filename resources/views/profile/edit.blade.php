@@ -30,14 +30,13 @@
                                 type="text" 
                                 id="name"
                                 name="name" 
-                                class="form-control text-white" 
-                                value="{{ $user_info->name }}"
+                                class="form-control text-white @error('name') is-invalid @enderror" 
+                                value="{{ old('name', $user_info->name) }}"
                                 placeholder="Введите ваше имя"
                                 required
                             >
                             @error('name')
-                                <div class="text-danger mt-1">
-                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -52,14 +51,13 @@
                                 type="email" 
                                 id="email"
                                 name="email" 
-                                class="form-control text-white" 
-                                value="{{ $user_info->email }}"
+                                class="form-control text-white @error('email') is-invalid @enderror" 
+                                value="{{ old('email', $user_info->email) }}"
                                 placeholder="Введите ваш email"
                                 required
                             >
                             @error('email')
-                                <div class="text-danger mt-1">
-                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
