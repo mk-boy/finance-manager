@@ -29,7 +29,7 @@ class PaymentController extends Controller
         $currencies = Currency::all();
 
         return view('payments.add', [
-            'userInfo' => $user,
+            'userInfo'   => $user,
             'currencies' => $currencies
         ]);
     }
@@ -56,7 +56,7 @@ class PaymentController extends Controller
         $currencies = Currency::all();
         
         return view('payments.edit', [
-            'payment' => $payment,
+            'payment'    => $payment,
             'currencies' => $currencies
         ]);
     }

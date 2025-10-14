@@ -29,9 +29,9 @@ class TransactionController extends Controller
         $payments = TransactionService::getUserPayments($user);
 
         return view('transactions.add', [
-            'userInfo' => $user,
+            'userInfo'   => $user,
             'categories' => $categories,
-            'payments' => $payments
+            'payments'   => $payments
         ]);
     }
 
@@ -59,8 +59,8 @@ class TransactionController extends Controller
 
         return view('transactions.edit', [
             'transaction' => $transaction,
-            'categories' => $categories,
-            'payments' => $payments
+            'categories'  => $categories,
+            'payments'    => $payments
         ]);
     }
 

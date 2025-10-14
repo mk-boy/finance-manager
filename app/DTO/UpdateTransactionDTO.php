@@ -19,11 +19,11 @@ class UpdateTransactionDTO
     {
         $validated = $request->validate([
             'transaction_id' => 'required|integer',
-            'name' => 'required|string|max:255',
-            'sum' => 'required|numeric|min:1',
-            'type_id' => 'required|integer',
-            'category_id' => 'required|integer',
-            'payment_id' => 'required|integer'
+            'name'           => 'required|string|max:255',
+            'sum'            => 'required|numeric|min:1',
+            'type_id'        => 'required|integer',
+            'category_id'    => 'required|integer',
+            'payment_id'     => 'required|integer'
         ]);
 
         return new self(
@@ -39,11 +39,11 @@ class UpdateTransactionDTO
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
-            'sum' => $this->sum,
-            'type_id' => $this->type_id,
+            'name'        => $this->name,
+            'sum'         => $this->sum,
+            'type_id'     => $this->type_id,
             'category_id' => $this->category_id,
-            'payment_id' => $this->payment_id
+            'payment_id'  => $this->payment_id
         ];
     }
 }

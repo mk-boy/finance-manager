@@ -16,7 +16,7 @@ class UpdateProfileDTO
     public static function fromRequest(Request $request, User $user): self
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'  => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
         ]);
 
@@ -30,7 +30,7 @@ class UpdateProfileDTO
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
+            'name'  => $this->name,
             'email' => $this->email
         ];
     }

@@ -16,9 +16,9 @@ class UpdatePaymentDTO
     public static function fromRequest(Request $request): self
     {
         $validated = $request->validate([
-            'payment_id' => 'required|integer',
-            'name' => 'required|string|max:255',
-            'type_id' => 'required|integer',
+            'payment_id'  => 'required|integer',
+            'name'        => 'required|string|max:255',
+            'type_id'     => 'required|integer',
             'currency_id' => 'required|integer'
         ]);
 
@@ -33,8 +33,8 @@ class UpdatePaymentDTO
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
-            'type_id' => $this->type_id,
+            'name'        => $this->name,
+            'type_id'     => $this->type_id,
             'currency_id' => $this->currency_id
         ];
     }

@@ -53,7 +53,7 @@ class CategoryController extends Controller
         
         return view('categories.edit', [
             'category' => $category,
-            'user' => $user
+            'user'     => $user
         ]);
     }
 

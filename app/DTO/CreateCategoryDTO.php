@@ -18,10 +18,10 @@ class CreateCategoryDTO
     public static function fromRequest(Request $request, User $user)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'type_id' => 'required|integer',
+            'name'        => 'required|string|max:255',
+            'type_id'     => 'required|integer',
             'description' => 'nullable|string|max:255',
-            'tag_color' => 'nullable|string|max:7',
+            'tag_color'   => 'nullable|string|max:7',
         ]);
 
         return new self(
@@ -36,11 +36,11 @@ class CreateCategoryDTO
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
-            'type_id' => $this->type_id,
-            'user_id' => $this->user_id,
+            'name'        => $this->name,
+            'type_id'     => $this->type_id,
+            'user_id'     => $this->user_id,
             'description' => $this->description,
-            'tag_color' => $this->tag_color,
+            'tag_color'   => $this->tag_color,
         ];
     }
 }

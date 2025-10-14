@@ -19,8 +19,8 @@ class ReportController extends Controller
 
         return view('reports.expense', [
             'transactions' => $expenseTransactions,
-            'categories' => $categories,
-            'filters' => $request->only(['date_from', 'date_to', 'category'])
+            'categories'   => $categories,
+            'filters'      => $request->only(['date_from', 'date_to', 'category'])
         ]);
     }
 
@@ -34,8 +34,8 @@ class ReportController extends Controller
 
         return view('reports.income', [
             'transactions' => $incomeTransactions,
-            'categories' => $categories,
-            'filters' => $request->only(['date_from', 'date_to', 'category'])
+            'categories'   => $categories,
+            'filters'      => $request->only(['date_from', 'date_to', 'category'])
         ]);
     }
 
@@ -52,10 +52,10 @@ class ReportController extends Controller
 
         return view('reports.summary', [
             'totalExpenses' => $totalExpenses,
-            'totalIncome' => $totalIncome,
-            'balance' => $balance,
-            'categories' => $categories,
-            'filters' => $filters
+            'totalIncome'   => $totalIncome,
+            'balance'       => $balance,
+            'categories'    => $categories,
+            'filters'       => $filters
         ]);
     }
 }

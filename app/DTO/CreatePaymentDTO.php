@@ -17,8 +17,8 @@ class CreatePaymentDTO
     public static function fromRequest(Request $request, User $user)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'type_id' => 'required|integer',
+            'name'        => 'required|string|max:255',
+            'type_id'     => 'required|integer',
             'currency_id' => 'required|integer',
         ]);
 

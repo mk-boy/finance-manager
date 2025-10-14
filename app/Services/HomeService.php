@@ -30,11 +30,11 @@ class HomeService
         $recentTransactions = $transactions->take(5);
         
         return [
-            'totalBalance' => $totalBalance,
-            'totalIncome' => $totalIncome,
-            'totalExpense' => $totalExpense,
+            'totalBalance'       => $totalBalance,
+            'totalIncome'        => $totalIncome,
+            'totalExpense'       => $totalExpense,
             'recentTransactions' => $recentTransactions,
-            'payments' => $payments
+            'payments'           => $payments
         ];
     }
 }
