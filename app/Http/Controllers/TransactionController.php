@@ -3,32 +3,30 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\DTO\CreateTransactionDTO;
+use App\DTO\UpdateTransactionDTO;
+use App\Services\TransactionService;
 use Illuminate\Http\Request;
-use App\Models\Transaction;
-use App\Models\Category;
-use App\Models\Payment;
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        $user = Auth::user();
-
-        $transactions = Transaction::where('user_id', $user->id)
-                                 ->with(['category', 'payment'])
-                                 ->orderBy('created_at', 'desc')
-                                 ->get();
+        $transactions = TransactionService::getUserTransactions(Auth::user());
 
         return view('transactions.main', [
             'transactions' => $transactions
         ]);
     }
 
-    public function addView()
+    public function addView(): View
     {
         $user = Auth::user();
-        $categories = Category::where('user_id', $user->id)->get();
-        $payments = Payment::where('user_id', $user->id)->with('currency')->get();
+        $categories = TransactionService::getUserCategories($user);
+        $payments = TransactionService::getUserPayments($user);
 
         return view('transactions.add', [
             'userInfo' => $user,
@@ -37,35 +35,27 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function add(Request $request)
+    public function add(Request $request, TransactionService $service): RedirectResponse
     {
-        $user = Auth::user();
+        $dto = CreateTransactionDTO::fromRequest($request, Auth::user());
+        $response = $service->createUserTransaction($dto);
 
-        Transaction::create([
-            'name' => $request->name,
-            'sum' => $request->sum,
-            'type_id' => $request->type_id,
-            'user_id' => $user->id,
-            'category_id' => $request->category_id,
-            'payment_id' => $request->payment_id
-        ]);
-
-        return redirect('/transactions');
+        $status = $response ? 'Транзакция успешно создана' : 'Ошибка при создании транзакции';
+        
+        return redirect()->route('transactions')->with('status', $status);
     }
 
-    public function editView($transaction_id)
+    public function editView($transaction_id): View
     {
         $user = Auth::user();
-        $transaction = Transaction::where('id', $transaction_id)
-                                 ->where('user_id', $user->id)
-                                 ->first();
         
-        if (!$transaction) {
-            return redirect('/transactions')->with('error', 'Транзакция не найдена');
+        if (!TransactionService::canUserAccessTransaction($transaction_id, $user)) {
+            return redirect('/transactions')->with('error', 'Нет доступа к этой транзакции');
         }
 
-        $categories = Category::where('user_id', $user->id)->get();
-        $payments = Payment::where('user_id', $user->id)->with('currency')->get();
+        $transaction = TransactionService::getUserTransactionById($transaction_id, $user);
+        $categories = TransactionService::getUserCategories($user);
+        $payments = TransactionService::getUserPayments($user);
 
         return view('transactions.edit', [
             'transaction' => $transaction,
@@ -74,46 +64,38 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, TransactionService $service): RedirectResponse
     {
         $user = Auth::user();
-        $transaction = Transaction::where('id', $request->transaction_id)
-                                 ->where('user_id', $user->id)
-                                 ->first();
-
-        if (!$transaction) {
-            return redirect('/transactions')->with('error', 'Транзакция не найдена');
+        
+        if (!TransactionService::canUserAccessTransaction($request->transaction_id, $user)) {
+            return redirect('/transactions')->with('error', 'Нет доступа к этой транзакции');
         }
 
-        $transaction->update([
-            'name' => $request->name,
-            'sum' => $request->sum,
-            'type_id' => $request->type_id,
-            'category_id' => $request->category_id,
-            'payment_id' => $request->payment_id
-        ]);
+        $dto = UpdateTransactionDTO::fromRequest($request);
+        $response = $service->updateUserTransaction($dto);
 
-        return redirect('/transactions')->with('success', 'Транзакция успешно обновлена');
+        $status = $response ? 'Транзакция успешно обновлена' : 'Ошибка при обновлении транзакции';
+        
+        return redirect('/transactions')->with('status', $status);
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, TransactionService $service): JsonResponse
     {
         $user = Auth::user();
-        $transaction = Transaction::where('id', $request->transaction_id)
-                                 ->where('user_id', $user->id)
-                                 ->first();
-
-        if ($transaction) {
-            $transaction->delete();
+        
+        if (!TransactionService::canUserAccessTransaction($request->transaction_id, $user)) {
             return response()->json([
-                'success' => true,
-                'message' => 'Транзакция успешно удалена'
-            ]);
+                'success' => false,
+                'message' => 'Нет доступа к этой транзакции'
+            ], 403);
         }
 
+        $result = $service->deleteUserTransaction($request);
+
         return response()->json([
-            'success' => false,
-            'message' => 'Транзакция не найдена'
-        ], 404);
+            'success' => $result,
+            'message' => $result ? 'Транзакция успешно удалена' : 'Ошибка при удалении транзакции'
+        ]);
     }
 }

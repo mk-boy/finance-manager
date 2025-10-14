@@ -3,23 +3,26 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\DTO\CreateCategoryDTO;
+use App\DTO\UpdateCategoryDTO;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        $user = Auth::user();
-
-        $categories = Category::where('user_id', $user->id)->get();
+        $categories = CategoryService::getUserCategories(Auth::user());
 
         return view('categories.main', [
             'categories' => $categories
         ]);
     }
 
-    public function addView()
+    public function addView(): View
     {
         $user = Auth::user();
 
@@ -28,75 +31,64 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function add(Request $request)
+    public function add(Request $request, CategoryService $service): RedirectResponse
     {
-        Category::create([
-            'name' => $request->name,
-            'type_id' => $request->type_id,
-            'description' => $request->description,
-            'user_id' => $request->user_id,
-            'tag_color' => $request->tag_color
-        ]);
+        $dto = CreateCategoryDTO::fromRequest($request, Auth::user());
+        $response = $service->createUserCategory($dto);
 
-        return redirect('/categories');
+        $status = $response ? 'Категория успешно создана' : 'Ошибка при создании категории';
+        
+        return redirect()->route('categories')->with('status', $status);
     }
 
-    public function editView($id)
+    public function editView($id): View
     {
         $user = Auth::user();
-        $category = Category::where('id', $id)
-            ->where('user_id', $user->id)
-            ->first();
-
-        if (!$category) {
-            return redirect('/categories')->with('error', 'Категория не найдена');
+        
+        if (!CategoryService::canUserAccessCategory($id, $user)) {
+            return redirect('/categories')->with('error', 'Нет доступа к этой категории');
         }
 
+        $category = CategoryService::getUserCategoryById($id, $user);
+        
         return view('categories.edit', [
             'category' => $category,
             'user' => $user
         ]);
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, CategoryService $service): RedirectResponse
     {
         $user = Auth::user();
-        $category = Category::where('id', $request->category_id)
-            ->where('user_id', $user->id)
-            ->first();
-
-        if (!$category) {
-            return redirect('/categories')->with('error', 'Категория не найдена');
+        
+        if (!CategoryService::canUserAccessCategory($request->category_id, $user)) {
+            return redirect('/categories')->with('error', 'Нет доступа к этой категории');
         }
 
-        $category->update([
-            'name' => $request->name,
-            'type_id' => $request->type_id,
-            'description' => $request->description,
-            'tag_color' => $request->tag_color
-        ]);
+        $dto = UpdateCategoryDTO::fromRequest($request);
+        $response = $service->updateUserCategory($dto);
 
-        return redirect('/categories')->with('success', 'Категория успешно обновлена');
+        $status = $response ? 'Категория успешно обновлена' : 'Ошибка при обновлении категории';
+        
+        return redirect('/categories')->with('status', $status);
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, CategoryService $service): JsonResponse
     {
         $user = Auth::user();
-        $category = Category::where('id', $request->category_id)
-            ->where('user_id', $user->id)
-            ->first();
-
-        if ($category) {
-            $category->delete();
+        
+        if (!CategoryService::canUserAccessCategory($request->category_id, $user)) {
             return response()->json([
-                'success' => true,
-                'message' => 'Категория успешно удалена'
-            ]);
+                'success' => false,
+                'message' => 'Нет доступа к этой категории'
+            ], 403);
         }
 
+        $result = $service->deleteUserCategory($request);
+
         return response()->json([
-            'success' => false,
-            'message' => 'Категория не найдена'
-        ], 404);
+            'success' => $result,
+            'message' => $result ? 'Категория успешно удалена' : 'Ошибка при удалении категории'
+        ]);
     }
 }

@@ -17,37 +17,89 @@
                         <input type="hidden" name="category_id" value="{{ $category->id }}">
                         
                         <div class="mb-3">
-                            <label for="name" class="form-label text-white">Название категории</label>
-                            <input type="text" class="form-control text-white" 
-                                   id="name" name="name" value="{{ $category->name }}" required>
+                            <label for="name" class="form-label text-white">
+                                <i class="fas fa-tag me-2"></i>
+                                Название категории
+                            </label>
+                            <input type="text" 
+                                   class="form-control text-white @error('name') is-invalid @enderror" 
+                                   id="name" 
+                                   name="name" 
+                                   value="{{ old('name', $category->name) }}"
+                                   placeholder="Введите название категории"
+                                   required>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         
                         <div class="mb-3">
-                            <label for="description" class="form-label text-white">Описание</label>
-                            <textarea class="form-control text-white" 
-                                      id="description" name="description" rows="3" maxlength="255">{{ $category->description }}</textarea>
+                            <label for="description" class="form-label text-white">
+                                <i class="fas fa-align-left me-2"></i>
+                                Описание
+                            </label>
+                            <textarea class="form-control text-white @error('description') is-invalid @enderror" 
+                                      id="description" 
+                                      name="description" 
+                                      rows="3" 
+                                      maxlength="255"
+                                      placeholder="Введите описание категории (необязательно)">{{ old('description', $category->description) }}</textarea>
+                            @error('description')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         
                         <div class="mb-3">
-                            <label for="type_id" class="form-label text-white">Тип категории</label>
-                            <select class="form-select text-white" id="type_id" name="type_id" required>
-                                <option value="{{ \App\Models\Category::INCOME_TYPE_ID }}" 
-                                        {{ $category->type_id == \App\Models\Category::INCOME_TYPE_ID ? 'selected' : '' }}>
-                                    Доход
-                                </option>
-                                <option value="{{ \App\Models\Category::EXPENSE_TYPE_ID }}" 
-                                        {{ $category->type_id == \App\Models\Category::EXPENSE_TYPE_ID ? 'selected' : '' }}>
-                                    Расход
-                                </option>
+                            <label for="type_id" class="form-label text-white">
+                                <i class="fas fa-list me-2"></i>
+                                Тип категории
+                            </label>
+                            <select class="form-select text-white @error('type_id') is-invalid @enderror" 
+                                    id="type_id" 
+                                    name="type_id" 
+                                    required>
+                                @if (old('type_id', $category->type_id) == \App\Models\Category::INCOME_TYPE_ID)
+                                    <option value="{{ \App\Models\Category::INCOME_TYPE_ID }}" selected>Доход</option>
+                                @else
+                                    <option value="{{ \App\Models\Category::INCOME_TYPE_ID }}">Доход</option>
+                                @endif
+                                @if (old('type_id', $category->type_id) == \App\Models\Category::EXPENSE_TYPE_ID)
+                                    <option value="{{ \App\Models\Category::EXPENSE_TYPE_ID }}" selected>Расход</option>
+                                @else
+                                    <option value="{{ \App\Models\Category::EXPENSE_TYPE_ID }}">Расход</option>
+                                @endif
                             </select>
+                            @error('type_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         
                         <div class="mb-3">
-                            <label for="tag_color" class="form-label text-white">Цвет категории</label>
+                            <label for="tag_color" class="form-label text-white">
+                                <i class="fas fa-palette me-2"></i>
+                                Цвет категории
+                            </label>
                             <div class="d-flex align-items-center gap-3">
-                                <input type="color" class="d-none" id="tag_color" name="tag_color" value="{{ $category->tag_color }}">
-                                <div class="color-preview" style="width: 30px; height: 30px; background-color: {{ $category->tag_color }}; border-radius: 50%; transition: all 0.3s ease; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);" title="Нажмите для выбора цвета"></div>
+                                <input type="color" 
+                                       class="d-none @error('tag_color') is-invalid @enderror" 
+                                       id="tag_color" 
+                                       name="tag_color" 
+                                       value="{{ old('tag_color', $category->tag_color) }}">
+                                <div class="color-preview" 
+                                     style="width: 30px; height: 30px; background-color: {{ old('tag_color', $category->tag_color) }}; border-radius: 50%; transition: all 0.3s ease; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);" 
+                                     title="Нажмите для выбора цвета"></div>
                             </div>
+                            @error('tag_color')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         
                         <div class="d-flex gap-2">
