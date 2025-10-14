@@ -21,11 +21,17 @@
                                 Название счёта
                             </label>
                             <input type="text" 
-                                   class="form-control text-white" 
+                                   class="form-control text-white @error('name') is-invalid @enderror" 
                                    id="name" 
                                    name="name" 
+                                   value="{{ old('name') }}"
                                    placeholder="Введите название счёта"
                                    required>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-4">
@@ -33,31 +39,41 @@
                                 <i class="fas fa-list me-2"></i>
                                 Тип счёта
                             </label>
-                            <select class="form-select text-white" 
+                            <select class="form-select text-white @error('type_id') is-invalid @enderror" 
                                     id="type_id" 
                                     name="type_id" 
                                     required>
-                                <option value="" disabled selected>Выберите тип счёта</option>
+                                <option value="" disabled {{ old('type_id') == '' ? 'selected' : '' }}>Выберите тип счёта</option>
                                 @foreach (\App\Models\Payment::PAYMENTS_TITLES as $key => $value)
-                                    <option value="{{ $key }}">{{ $value }}</option>
+                                    <option value="{{ $key }}" {{ old('type_id') == $key ? 'selected' : '' }}>{{ $value }}</option>
                                 @endforeach
                             </select>
+                            @error('type_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-4">
-                            <label for="type_id" class="form-label text-white">
-                                <i class="fas fa-list me-2"></i>
+                            <label for="currency_id" class="form-label text-white">
+                                <i class="fas fa-coins me-2"></i>
                                 Валюта счёта
                             </label>
-                            <select class="form-select text-white" 
+                            <select class="form-select text-white @error('currency_id') is-invalid @enderror" 
                                     id="currency_id" 
                                     name="currency_id" 
                                     required>
-                                <option value="" disabled selected>Выберите валюту счёта</option>
+                                <option value="" disabled {{ old('currency_id') == '' ? 'selected' : '' }}>Выберите валюту счёта</option>
                                 @foreach ($currencies as $currency)
-                                    <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                    <option value="{{ $currency->id }}" {{ old('currency_id') == $currency->id ? 'selected' : '' }}>{{ $currency->name }}</option>
                                 @endforeach
                             </select>
+                            @error('currency_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="d-flex gap-3">

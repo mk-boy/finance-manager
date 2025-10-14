@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\DTO\CreatePaymentDTO;
+use App\DTO\UpdatePaymentDTO;
+use App\Services\PaymentService;
 use Illuminate\Http\Request;
-use App\Models\Payment;
 use App\Models\Currency;
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class PaymentController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        $user = Auth::user();
-
-        $payments = Payment::where('user_id', $user->id)
-                           ->with('currency')
-                           ->get();
+        $payments = PaymentService::getUserPayment(Auth::user());
 
         return view('payments.main', [
             'payments' => $payments
         ]);
     }
 
-    public function addView()
+    public function addView(): View
     {
         $user = Auth::user();
         $currencies = Currency::all();
@@ -33,58 +34,65 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function add(Request $request)
+    public function add(Request $request, PaymentService $service): RedirectResponse
     {
-        $user = Auth::user();
+        $dto = CreatePaymentDTO::fromRequest($request, Auth::user());
+        $response = $service->createUserPayment($dto);
 
-        Payment::create([
-            'name' => $request->name,
-            'type_id' => $request->type_id,
-            'user_id' => $user->id,
-            'currency_id' => $request->currency_id
-        ]);
-
-        return redirect('/payments');
+        $status = $response ? 'Платеж успешно создан' : 'Ошибка при создании платежа';
+        
+        return redirect()->route('payments')->with('status', $status);
     }
 
-    public function editView($payment_id)
+    public function editView($payment_id): View
     {
-        $payment = Payment::find($payment_id);
-        $currencies = Currency::all();
         $user = Auth::user();
         
-        if ($user->id == $payment->user_id) {
-            return view('payments.edit', [
-                'payment' => $payment,
-                'currencies' => $currencies
-            ]);
-        } else {
-            return 'Нету доступа';
+        if (!PaymentService::canUserAccessPayment($payment_id, $user)) {
+            return redirect('/payments')->with('error', 'Нет доступа к этому платежу');
         }
-    }
 
-    public function edit(Request $request)
-    {
-        $payment = Payment::find($request->payment_id);
-
-        $payment->update([
-            'name' => $request->name,
-            'type_id' => $request->type_id,
-            'currency_id' => $request->currency_id
+        $payment = PaymentService::getUserPaymentById($payment_id, $user);
+        $currencies = Currency::all();
+        
+        return view('payments.edit', [
+            'payment' => $payment,
+            'currencies' => $currencies
         ]);
-
-        return redirect('/payments');
     }
 
-    public function delete(Request $request)
+    public function edit(Request $request, PaymentService $service): RedirectResponse
     {
-        $payment = Payment::find($request->payment_id);
+        $user = Auth::user();
+        
+        if (!PaymentService::canUserAccessPayment($request->payment_id, $user)) {
+            return redirect('/payments')->with('error', 'Нет доступа к этому платежу');
+        }
 
-        $payment->delete();
+        $dto = UpdatePaymentDTO::fromRequest($request);
+        $response = $service->updateUserPayment($dto);
+
+        $status = $response ? 'Платеж успешно обновлен' : 'Ошибка при обновлении платежа';
+        
+        return redirect('/payments')->with('status', $status);
+    }
+
+    public function delete(Request $request, PaymentService $service): JsonResponse
+    {
+        $user = Auth::user();
+        
+        if (!PaymentService::canUserAccessPayment($request->payment_id, $user)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Нет доступа к этому платежу'
+            ], 403);
+        }
+
+        $result = $service->deleteUserPayment($request);
 
         return response()->json([
-            'success' => true,
-            'message' => 'Счёт успешно удалён'
+            'success' => $result,
+            'message' => $result ? 'Счёт успешно удалён' : 'Ошибка при удалении счёта'
         ]);
     }
 }
