@@ -8,7 +8,7 @@ use App\Models\Payment;
 
 class HomeService
 {
-    public static function getDashboardData(User $user): array
+    public function getDashboardData(User $user): array
     {
         // Получаем все платежные средства пользователя
         $payments = Payment::where('user_id', $user->id)->get();

@@ -11,7 +11,7 @@ use App\Models\Payment;
 
 class PaymentService
 {
-    public static function getUserPayment(User $user)
+    public function getUserPayment(User $user)
     {
         $payments = Payment::where('user_id', $user->id)
                            ->with('currency')
@@ -20,7 +20,7 @@ class PaymentService
         return $payments;
     }
 
-    public static function createUserPayment(CreatePaymentDTO $dto)
+    public function createUserPayment(CreatePaymentDTO $dto)
     {
         $dataArray = $dto->toArray();
 
@@ -32,7 +32,7 @@ class PaymentService
         }
     }
 
-    public static function updateUserPayment(UpdatePaymentDTO $dto): bool
+    public function updateUserPayment(UpdatePaymentDTO $dto): bool
     {
         $dataArray = $dto->toArray();
 
@@ -44,14 +44,14 @@ class PaymentService
         }
     }
 
-    public static function getUserPaymentById(int $paymentId, User $user): ?Payment
+    public function getUserPaymentById(int $paymentId, User $user): ?Payment
     {
         return Payment::where('id', $paymentId)
                      ->where('user_id', $user->id)
                      ->first();
     }
 
-    public static function deleteUserPayment(Request $request): bool
+    public function deleteUserPayment(Request $request): bool
     {
         $payment = Payment::find($request->payment_id);
 
@@ -67,7 +67,7 @@ class PaymentService
         }
     }
 
-    public static function canUserAccessPayment(int $paymentId, User $user): bool
+    public function canUserAccessPayment(int $paymentId, User $user): bool
     {
         return Payment::where('id', $paymentId)
                      ->where('user_id', $user->id)

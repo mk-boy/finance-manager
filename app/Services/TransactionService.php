@@ -13,7 +13,7 @@ use App\Models\Payment;
 
 class TransactionService
 {
-    public static function getUserTransactions(User $user)
+    public function getUserTransactions(User $user)
     {
         $transactions = Transaction::where('user_id', $user->id)
                                  ->with(['category', 'payment'])
@@ -23,7 +23,7 @@ class TransactionService
         return $transactions;
     }
 
-    public static function createUserTransaction(CreateTransactionDTO $dto)
+    public function createUserTransaction(CreateTransactionDTO $dto)
     {
         $dataArray = $dto->toArray();
 
@@ -35,7 +35,7 @@ class TransactionService
         }
     }
 
-    public static function updateUserTransaction(UpdateTransactionDTO $dto): bool
+    public function updateUserTransaction(UpdateTransactionDTO $dto): bool
     {
         $dataArray = $dto->toArray();
 
@@ -47,14 +47,14 @@ class TransactionService
         }
     }
 
-    public static function getUserTransactionById(int $transactionId, User $user): ?Transaction
+    public function getUserTransactionById(int $transactionId, User $user): ?Transaction
     {
         return Transaction::where('id', $transactionId)
                          ->where('user_id', $user->id)
                          ->first();
     }
 
-    public static function deleteUserTransaction(Request $request): bool
+    public function deleteUserTransaction(Request $request): bool
     {
         $transaction = Transaction::find($request->transaction_id);
 
@@ -70,19 +70,19 @@ class TransactionService
         }
     }
 
-    public static function canUserAccessTransaction(int $transactionId, User $user): bool
+    public function canUserAccessTransaction(int $transactionId, User $user): bool
     {
         return Transaction::where('id', $transactionId)
                          ->where('user_id', $user->id)
                          ->exists();
     }
 
-    public static function getUserCategories(User $user)
+    public function getUserCategories(User $user)
     {
         return Category::where('user_id', $user->id)->get();
     }
 
-    public static function getUserPayments(User $user)
+    public function getUserPayments(User $user)
     {
         return Payment::where('user_id', $user->id)->with('currency')->get();
     }

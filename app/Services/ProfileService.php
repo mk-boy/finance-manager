@@ -8,12 +8,12 @@ use App\Models\User;
 
 class ProfileService
 {
-    public static function getUserProfile(User $user): User
+    public function getUserProfile(User $user): User
     {
         return $user;
     }
 
-    public static function updateUserProfile(UpdateProfileDTO $dto): bool
+    public function updateUserProfile(UpdateProfileDTO $dto): bool
     {
         $dataArray = $dto->toArray();
 
@@ -25,7 +25,7 @@ class ProfileService
         }
     }
 
-    public static function getUserById(int $userId): ?User
+    public function getUserById(int $userId): ?User
     {
         return User::find($userId);
     }

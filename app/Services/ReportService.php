@@ -8,12 +8,12 @@ use App\Models\Category;
 
 class ReportService
 {
-    public static function getUserCategories(User $user)
+    public function getUserCategories(User $user)
     {
         return Category::where('user_id', $user->id)->get();
     }
 
-    public static function getExpenseReport(User $user, array $filters = [])
+    public function getExpenseReport(User $user, array $filters = [])
     {
         $expenseQuery = Transaction::where('user_id', $user->id)
                                   ->where('type_id', Transaction::EXPENSE_TYPE_ID)
@@ -38,7 +38,7 @@ class ReportService
         return $expenseTransactions;
     }
 
-    public static function getIncomeReport(User $user, array $filters = [])
+    public function getIncomeReport(User $user, array $filters = [])
     {
         $incomeQuery = Transaction::where('user_id', $user->id)
                                  ->where('type_id', Transaction::INCOME_TYPE_ID)
@@ -63,7 +63,7 @@ class ReportService
         return $incomeTransactions;
     }
 
-    public static function getTotalExpenses(User $user, array $filters = [])
+    public function getTotalExpenses(User $user, array $filters = [])
     {
         $query = Transaction::where('user_id', $user->id)
                            ->where('type_id', Transaction::EXPENSE_TYPE_ID);
@@ -83,7 +83,7 @@ class ReportService
         return $query->sum('sum');
     }
 
-    public static function getTotalIncome(User $user, array $filters = [])
+    public function getTotalIncome(User $user, array $filters = [])
     {
         $query = Transaction::where('user_id', $user->id)
                            ->where('type_id', Transaction::INCOME_TYPE_ID);
