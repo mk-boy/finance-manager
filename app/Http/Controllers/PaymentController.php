@@ -14,9 +14,13 @@ use Illuminate\Http\RedirectResponse;
 
 class PaymentController extends Controller
 {
-    public function index(PaymentService $service): View
+    public function __construct(
+        private readonly PaymentService $service
+    ) {}
+
+    public function index(): View
     {
-        $payments = $service->getUserPayment(Auth::user());
+        $payments = $this->service->getUserPayment(Auth::user());
 
         return view('payments.main', [
             'payments' => $payments
@@ -34,25 +38,25 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function add(Request $request, PaymentService $service): RedirectResponse
+    public function add(Request $request): RedirectResponse
     {
         $dto = CreatePaymentDTO::fromRequest($request, Auth::user());
-        $response = $service->createUserPayment($dto);
+        $response = $this->service->createUserPayment($dto);
 
         $status = $response ? 'Платеж успешно создан' : 'Ошибка при создании платежа';
         
         return redirect()->route('payments')->with('status', $status);
     }
 
-    public function editView($payment_id, PaymentService $service): View
+    public function editView($payment_id): View
     {
         $user = Auth::user();
         
-        if (!$service->canUserAccessPayment($payment_id, $user)) {
+        if (!$this->service->canUserAccessPayment($payment_id, $user)) {
             return redirect('/payments')->with('error', 'Нет доступа к этому платежу');
         }
 
-        $payment = $service->getUserPaymentById($payment_id, $user);
+        $payment = $this->service->getUserPaymentById($payment_id, $user);
         $currencies = Currency::all();
         
         return view('payments.edit', [
@@ -61,34 +65,34 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function edit(Request $request, PaymentService $service): RedirectResponse
+    public function edit(Request $request): RedirectResponse
     {
         $user = Auth::user();
         
-        if (!$service->canUserAccessPayment($request->payment_id, $user)) {
+        if (!$this->service->canUserAccessPayment($request->payment_id, $user)) {
             return redirect('/payments')->with('error', 'Нет доступа к этому платежу');
         }
 
         $dto = UpdatePaymentDTO::fromRequest($request);
-        $response = $service->updateUserPayment($dto);
+        $response = $this->service->updateUserPayment($dto);
 
         $status = $response ? 'Платеж успешно обновлен' : 'Ошибка при обновлении платежа';
         
         return redirect('/payments')->with('status', $status);
     }
 
-    public function delete(Request $request, PaymentService $service): JsonResponse
+    public function delete(Request $request): JsonResponse
     {
         $user = Auth::user();
         
-        if (!$service->canUserAccessPayment($request->payment_id, $user)) {
+        if (!$this->service->canUserAccessPayment($request->payment_id, $user)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Нет доступа к этому платежу'
             ], 403);
         }
 
-        $result = $service->deleteUserPayment($request);
+        $result = $this->service->deleteUserPayment($request);
 
         return response()->json([
             'success' => $result,

@@ -9,13 +9,17 @@ use Illuminate\View\View;
 
 class ReportController extends Controller
 {
-    public function expense(Request $request, ReportService $service): View
+    public function __construct(
+        private readonly ReportService $service
+    ) {}
+
+    public function expense(Request $request): View
     {
         $user = Auth::user();
 
-        $categories = $service->getUserCategories($user);
+        $categories = $this->service->getUserCategories($user);
 
-        $expenseTransactions = $service->getExpenseReport($user, $request->only(['date_from', 'date_to', 'category']));
+        $expenseTransactions = $this->service->getExpenseReport($user, $request->only(['date_from', 'date_to', 'category']));
 
         return view('reports.expense', [
             'transactions' => $expenseTransactions,
@@ -24,13 +28,13 @@ class ReportController extends Controller
         ]);
     }
 
-    public function income(Request $request, ReportService $service): View
+    public function income(Request $request): View
     {
         $user = Auth::user();
 
-        $categories = $service->getUserCategories($user);
+        $categories = $this->service->getUserCategories($user);
 
-        $incomeTransactions = $service->getIncomeReport($user, $request->only(['date_from', 'date_to', 'category']));
+        $incomeTransactions = $this->service->getIncomeReport($user, $request->only(['date_from', 'date_to', 'category']));
 
         return view('reports.income', [
             'transactions' => $incomeTransactions,
@@ -39,16 +43,16 @@ class ReportController extends Controller
         ]);
     }
 
-    public function summary(Request $request, ReportService $service): View
+    public function summary(Request $request): View
     {
         $user = Auth::user();
         $filters = $request->only(['date_from', 'date_to', 'category']);
 
-        $totalExpenses = $service->getTotalExpenses($user, $filters);
-        $totalIncome = $service->getTotalIncome($user, $filters);
+        $totalExpenses = $this->service->getTotalExpenses($user, $filters);
+        $totalIncome = $this->service->getTotalIncome($user, $filters);
         $balance = $totalIncome - $totalExpenses;
 
-        $categories = $service->getUserCategories($user);
+        $categories = $this->service->getUserCategories($user);
 
         return view('reports.summary', [
             'totalExpenses' => $totalExpenses,

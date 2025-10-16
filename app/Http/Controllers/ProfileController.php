@@ -11,33 +11,35 @@ use Illuminate\Http\RedirectResponse;
 
 class ProfileController extends Controller
 {
-    public function __construct()
+    public function __construct(
+        private readonly ProfileService $service
+    )
     {
         $this->middleware('auth');
     }
     
-    public function index(ProfileService $service): View
+    public function index(): View
     {
-        $user_info = $service->getUserProfile(Auth::user());
+        $user_info = $this->service->getUserProfile(Auth::user());
 
         return view('profile.main', [
             'user_info' => $user_info
         ]);
     }
 
-    public function editView(ProfileService $service): View
+    public function editView(): View
     {
-        $user_info = $service->getUserProfile(Auth::user());
+        $user_info = $this->service->getUserProfile(Auth::user());
 
         return view('profile.edit', [
             'user_info' => $user_info
         ]);
     }
 
-    public function edit(Request $request, ProfileService $service): RedirectResponse
+    public function edit(Request $request): RedirectResponse
     {
         $dto = UpdateProfileDTO::fromRequest($request, Auth::user());
-        $response = $service->updateUserProfile($dto);
+        $response = $this->service->updateUserProfile($dto);
 
         $status = $response ? 'Профиль успешно обновлен' : 'Ошибка при обновлении профиля';
         

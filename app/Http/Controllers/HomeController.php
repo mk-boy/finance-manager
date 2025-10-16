@@ -9,25 +9,17 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(
+        private readonly HomeService $service
+    )
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index(HomeService $service): View
+    public function index(): View
     {
         $user = Auth::user();
-        $dashboardData = $service->getDashboardData($user);
+        $dashboardData = $this->service->getDashboardData($user);
         
         return view('home', $dashboardData);
     }
