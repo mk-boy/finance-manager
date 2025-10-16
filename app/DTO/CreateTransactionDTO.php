@@ -9,7 +9,7 @@ class CreateTransactionDTO
 {
     public function __construct(
         public readonly string $name,
-        public readonly float $sum,
+        public readonly int $sum,
         public readonly int $type_id,
         public readonly int $user_id,
         public readonly int $category_id,

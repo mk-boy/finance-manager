@@ -9,7 +9,7 @@ class UpdateTransactionDTO
     public function __construct(
         public readonly int $id,
         public readonly string $name,
-        public readonly float $sum,
+        public readonly int $sum,
         public readonly int $type_id,
         public readonly int $category_id,
         public readonly int $payment_id
@@ -29,7 +29,7 @@ class UpdateTransactionDTO
         return new self(
             id: (int) $validated['transaction_id'],
             name: $validated['name'],
-            sum: (float) $validated['sum'],
+            sum: (int) $validated['sum'],
             type_id: (int) $validated['type_id'],
             category_id: (int) $validated['category_id'],
             payment_id: (int) $validated['payment_id']
