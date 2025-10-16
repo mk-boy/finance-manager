@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\DTO\CreatePaymentDTO;
 use App\DTO\UpdatePaymentDTO;
 use App\Models\User;
@@ -26,8 +27,17 @@ class PaymentService
 
         try {
             Payment::create($dataArray);
+
+            Log::info('Создан новый счёт', $dataArray);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при создании счёта", [
+                'data_array'    => $dataArray,
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
             return false;
         }
     }
@@ -38,8 +48,18 @@ class PaymentService
 
         try {
             Payment::where('id', $dto->id)->update($dataArray);
+
+            Log::info('Обновлён счёт', $dataArray);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при редактировании счёта", [
+                'data_array'    => $dataArray,
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
+
             return false;
         }
     }
@@ -61,8 +81,27 @@ class PaymentService
 
         try {
             $payment->delete();
+
+            Log::info('Удалён счёт', [
+                'payment_id' => $request->payment_id
+            ]);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при удалении счёта", [
+                'dataArray'     => [
+                    'id'              => $payment->id,
+                    'user_id'         => $payment->user_id,
+                    'currency_id'     => $payment->currency_id,
+                    'name'            => $payment->name,
+                    'description'     => $payment->description,
+                    'current_balance' => $payment->current_balance
+                ],
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
+            
             return false;
         }
     }

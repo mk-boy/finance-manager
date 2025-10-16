@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\DTO\CreateCategoryDTO;
 use App\DTO\UpdateCategoryDTO;
 use App\Models\User;
@@ -24,8 +25,18 @@ class CategoryService
 
         try {
             Category::create($dataArray);
+
+            Log::info('Создана новая категория', $dataArray);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при создании категории", [
+                'data_array'    => $dataArray,
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
+
             return false;
         }
     }
@@ -36,8 +47,18 @@ class CategoryService
 
         try {
             Category::where('id', $dto->id)->update($dataArray);
+
+            Log::info('Обновлена категория', $dataArray);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при редактировании категории", [
+                'data_array'    => $dataArray,
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
+
             return false;
         }
     }
@@ -59,8 +80,27 @@ class CategoryService
 
         try {
             $category->delete();
+
+            Log::info('Удалена категория', [
+                'category_id' => $request->category_id
+            ]);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при удалении категории", [
+                'dataArray'     => [
+                    'id'          => $category->id,
+                    'user_id'     => $category->user_id,
+                    'type_id'     => $category->type_id,
+                    'name'        => $category->name,
+                    'description' => $category->description,
+                    'tag_color'   => $category->tag_color
+                ],
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
+            
             return false;
         }
     }

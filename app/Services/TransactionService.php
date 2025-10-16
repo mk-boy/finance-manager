@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\DTO\CreateTransactionDTO;
 use App\DTO\UpdateTransactionDTO;
 use App\Models\User;
@@ -29,8 +30,18 @@ class TransactionService
 
         try {
             Transaction::create($dataArray);
+
+            Log::info('Создана новая транзакция', $dataArray);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при создании транзакции", [
+                'data_array'    => $dataArray,
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
+
             return false;
         }
     }
@@ -41,8 +52,18 @@ class TransactionService
 
         try {
             Transaction::where('id', $dto->id)->update($dataArray);
+
+            Log::info('Обновлена транзакция', $dataArray);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при редактировании транзакции", [
+                'data_array'    => $dataArray,
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
+
             return false;
         }
     }
@@ -64,8 +85,28 @@ class TransactionService
 
         try {
             $transaction->delete();
+
+            Log::info('Удалена транзакция', [
+                'transaction_id' => $request->transaction_id
+            ]);
+
             return true;
         } catch (Exception $ex) {
+            Log::error("Ошибка при удалении транзакции", [
+                'dataArray'     => [
+                    'id'          => $transaction->id,
+                    'user_id'     => $transaction->user_id,
+                    'category_id' => $transaction->category_id,
+                    'payment_id'  => $transaction->payment_id,
+                    'type_id'     => $transaction->type_id,
+                    'sum'         => $transaction->sum,
+                    'description' => $transaction->description
+                ],
+                'error_message' => $ex->getMessage(),
+                'error_code'    => $ex->getCode(),
+                'stack_trace'   => $ex->getTraceAsString()
+            ]);
+            
             return false;
         }
     }
