@@ -13,20 +13,20 @@ use Illuminate\Http\RedirectResponse;
 
 class TransactionController extends Controller
 {
-    public function index(): View
+    public function index(TransactionService $service): View
     {
-        $transactions = TransactionService::getUserTransactions(Auth::user());
+        $transactions = $service->getUserTransactions(Auth::user());
 
         return view('transactions.main', [
             'transactions' => $transactions
         ]);
     }
 
-    public function addView(): View
+    public function addView(TransactionService $service): View
     {
         $user = Auth::user();
-        $categories = TransactionService::getUserCategories($user);
-        $payments = TransactionService::getUserPayments($user);
+        $categories = $service->getUserCategories($user);
+        $payments = $service->getUserPayments($user);
 
         return view('transactions.add', [
             'userInfo'   => $user,
@@ -45,17 +45,17 @@ class TransactionController extends Controller
         return redirect()->route('transactions')->with('status', $status);
     }
 
-    public function editView($transaction_id): View
+    public function editView($transaction_id, TransactionService $service): View
     {
         $user = Auth::user();
         
-        if (!TransactionService::canUserAccessTransaction($transaction_id, $user)) {
+        if (!$service->canUserAccessTransaction($transaction_id, $user)) {
             return redirect('/transactions')->with('error', 'Нет доступа к этой транзакции');
         }
 
-        $transaction = TransactionService::getUserTransactionById($transaction_id, $user);
-        $categories = TransactionService::getUserCategories($user);
-        $payments = TransactionService::getUserPayments($user);
+        $transaction = $service->getUserTransactionById($transaction_id, $user);
+        $categories = $service->getUserCategories($user);
+        $payments = $service->getUserPayments($user);
 
         return view('transactions.edit', [
             'transaction' => $transaction,
@@ -68,7 +68,7 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
         
-        if (!TransactionService::canUserAccessTransaction($request->transaction_id, $user)) {
+        if (!$service->canUserAccessTransaction($request->transaction_id, $user)) {
             return redirect('/transactions')->with('error', 'Нет доступа к этой транзакции');
         }
 
@@ -84,7 +84,7 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
         
-        if (!TransactionService::canUserAccessTransaction($request->transaction_id, $user)) {
+        if (!$service->canUserAccessTransaction($request->transaction_id, $user)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Нет доступа к этой транзакции'

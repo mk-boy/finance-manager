@@ -16,18 +16,18 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
     
-    public function index(): View
+    public function index(ProfileService $service): View
     {
-        $user_info = ProfileService::getUserProfile(Auth::user());
+        $user_info = $service->getUserProfile(Auth::user());
 
         return view('profile.main', [
             'user_info' => $user_info
         ]);
     }
 
-    public function editView(): View
+    public function editView(ProfileService $service): View
     {
-        $user_info = ProfileService::getUserProfile(Auth::user());
+        $user_info = $service->getUserProfile(Auth::user());
 
         return view('profile.edit', [
             'user_info' => $user_info

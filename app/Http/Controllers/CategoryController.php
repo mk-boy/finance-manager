@@ -13,9 +13,9 @@ use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
-    public function index(): View
+    public function index(CategoryService $service): View
     {
-        $categories = CategoryService::getUserCategories(Auth::user());
+        $categories = $service->getUserCategories(Auth::user());
 
         return view('categories.main', [
             'categories' => $categories
@@ -41,15 +41,15 @@ class CategoryController extends Controller
         return redirect()->route('categories')->with('status', $status);
     }
 
-    public function editView($id): View
+    public function editView($id, CategoryService $service): View
     {
         $user = Auth::user();
         
-        if (!CategoryService::canUserAccessCategory($id, $user)) {
+        if (!$service->canUserAccessCategory($id, $user)) {
             return redirect('/categories')->with('error', 'Нет доступа к этой категории');
         }
 
-        $category = CategoryService::getUserCategoryById($id, $user);
+        $category = $service->getUserCategoryById($id, $user);
         
         return view('categories.edit', [
             'category' => $category,
@@ -61,7 +61,7 @@ class CategoryController extends Controller
     {
         $user = Auth::user();
         
-        if (!CategoryService::canUserAccessCategory($request->category_id, $user)) {
+        if (!$service->canUserAccessCategory($request->category_id, $user)) {
             return redirect('/categories')->with('error', 'Нет доступа к этой категории');
         }
 
@@ -77,7 +77,7 @@ class CategoryController extends Controller
     {
         $user = Auth::user();
         
-        if (!CategoryService::canUserAccessCategory($request->category_id, $user)) {
+        if (!$service->canUserAccessCategory($request->category_id, $user)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Нет доступа к этой категории'

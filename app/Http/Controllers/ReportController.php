@@ -9,13 +9,13 @@ use Illuminate\View\View;
 
 class ReportController extends Controller
 {
-    public function expense(Request $request): View
+    public function expense(Request $request, ReportService $service): View
     {
         $user = Auth::user();
 
-        $categories = ReportService::getUserCategories($user);
+        $categories = $service->getUserCategories($user);
 
-        $expenseTransactions = ReportService::getExpenseReport($user, $request->only(['date_from', 'date_to', 'category']));
+        $expenseTransactions = $service->getExpenseReport($user, $request->only(['date_from', 'date_to', 'category']));
 
         return view('reports.expense', [
             'transactions' => $expenseTransactions,
@@ -24,13 +24,13 @@ class ReportController extends Controller
         ]);
     }
 
-    public function income(Request $request): View
+    public function income(Request $request, ReportService $service): View
     {
         $user = Auth::user();
 
-        $categories = ReportService::getUserCategories($user);
+        $categories = $service->getUserCategories($user);
 
-        $incomeTransactions = ReportService::getIncomeReport($user, $request->only(['date_from', 'date_to', 'category']));
+        $incomeTransactions = $service->getIncomeReport($user, $request->only(['date_from', 'date_to', 'category']));
 
         return view('reports.income', [
             'transactions' => $incomeTransactions,
@@ -39,16 +39,16 @@ class ReportController extends Controller
         ]);
     }
 
-    public function summary(Request $request): View
+    public function summary(Request $request, ReportService $service): View
     {
         $user = Auth::user();
         $filters = $request->only(['date_from', 'date_to', 'category']);
 
-        $totalExpenses = ReportService::getTotalExpenses($user, $filters);
-        $totalIncome = ReportService::getTotalIncome($user, $filters);
+        $totalExpenses = $service->getTotalExpenses($user, $filters);
+        $totalIncome = $service->getTotalIncome($user, $filters);
         $balance = $totalIncome - $totalExpenses;
 
-        $categories = ReportService::getUserCategories($user);
+        $categories = $service->getUserCategories($user);
 
         return view('reports.summary', [
             'totalExpenses' => $totalExpenses,

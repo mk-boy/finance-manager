@@ -24,10 +24,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(): View
+    public function index(HomeService $service): View
     {
         $user = Auth::user();
-        $dashboardData = HomeService::getDashboardData($user);
+        $dashboardData = $service->getDashboardData($user);
         
         return view('home', $dashboardData);
     }

@@ -14,9 +14,9 @@ use Illuminate\Http\RedirectResponse;
 
 class PaymentController extends Controller
 {
-    public function index(): View
+    public function index(PaymentService $service): View
     {
-        $payments = PaymentService::getUserPayment(Auth::user());
+        $payments = $service->getUserPayment(Auth::user());
 
         return view('payments.main', [
             'payments' => $payments
@@ -44,15 +44,15 @@ class PaymentController extends Controller
         return redirect()->route('payments')->with('status', $status);
     }
 
-    public function editView($payment_id): View
+    public function editView($payment_id, PaymentService $service): View
     {
         $user = Auth::user();
         
-        if (!PaymentService::canUserAccessPayment($payment_id, $user)) {
+        if (!$service->canUserAccessPayment($payment_id, $user)) {
             return redirect('/payments')->with('error', 'Нет доступа к этому платежу');
         }
 
-        $payment = PaymentService::getUserPaymentById($payment_id, $user);
+        $payment = $service->getUserPaymentById($payment_id, $user);
         $currencies = Currency::all();
         
         return view('payments.edit', [
@@ -65,7 +65,7 @@ class PaymentController extends Controller
     {
         $user = Auth::user();
         
-        if (!PaymentService::canUserAccessPayment($request->payment_id, $user)) {
+        if (!$service->canUserAccessPayment($request->payment_id, $user)) {
             return redirect('/payments')->with('error', 'Нет доступа к этому платежу');
         }
 
@@ -81,7 +81,7 @@ class PaymentController extends Controller
     {
         $user = Auth::user();
         
-        if (!PaymentService::canUserAccessPayment($request->payment_id, $user)) {
+        if (!$service->canUserAccessPayment($request->payment_id, $user)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Нет доступа к этому платежу'
