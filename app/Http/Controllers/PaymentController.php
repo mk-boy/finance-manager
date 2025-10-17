@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\DTO\CreatePaymentDTO;
 use App\DTO\UpdatePaymentDTO;
+use App\Http\Requests\CreatePaymentRequest;
+use App\Http\Requests\UpdatePaymentRequest;
 use App\Services\PaymentService;
 use Illuminate\Http\Request;
 use App\Models\Currency;
@@ -38,7 +40,7 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function add(Request $request): RedirectResponse
+    public function add(CreatePaymentRequest $request): RedirectResponse
     {
         $dto = CreatePaymentDTO::fromRequest($request, Auth::user());
         $response = $this->service->createUserPayment($dto);
@@ -65,7 +67,7 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function edit(Request $request): RedirectResponse
+    public function edit(UpdatePaymentRequest $request): RedirectResponse
     {
         $user = Auth::user();
         

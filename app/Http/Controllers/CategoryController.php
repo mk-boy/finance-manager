@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\DTO\CreateCategoryDTO;
 use App\DTO\UpdateCategoryDTO;
+use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -35,7 +37,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function add(Request $request): RedirectResponse
+    public function add(CreateCategoryRequest $request): RedirectResponse
     {
         $dto = CreateCategoryDTO::fromRequest($request, Auth::user());
         $response = $this->service->createUserCategory($dto);
@@ -61,7 +63,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function edit(Request $request): RedirectResponse
+    public function edit(UpdateCategoryRequest $request): RedirectResponse
     {
         $user = Auth::user();
         

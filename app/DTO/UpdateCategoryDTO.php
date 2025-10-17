@@ -16,20 +16,12 @@ class UpdateCategoryDTO
 
     public static function fromRequest(Request $request): self
     {
-        $validated = $request->validate([
-            'category_id' => 'required|integer',
-            'name'        => 'required|string|max:255',
-            'type_id'     => 'required|integer',
-            'description' => 'nullable|string|max:255',
-            'tag_color'   => 'nullable|string|max:7'
-        ]);
-
         return new self(
-            id: (int) $validated['category_id'],
-            name: $validated['name'],
-            type_id: (int) $validated['type_id'],
-            description: $validated['description'] ?? null,
-            tag_color: $validated['tag_color'] ?? null
+            id: (int) $request->validated()['category_id'],
+            name: $request->validated()['name'],
+            type_id: (int) $request->validated()['type_id'],
+            description: $request->validated()['description'] ?? null,
+            tag_color: $request->validated()['tag_color'] ?? null
         );
     }
 

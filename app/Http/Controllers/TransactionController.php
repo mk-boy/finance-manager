@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\DTO\CreateTransactionDTO;
 use App\DTO\UpdateTransactionDTO;
+use App\Http\Requests\CreateTransactionRequest;
+use App\Http\Requests\UpdateTransactionRequest;
 use App\Services\TransactionService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -39,7 +41,7 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function add(Request $request): RedirectResponse
+    public function add(CreateTransactionRequest $request): RedirectResponse
     {
         $dto = CreateTransactionDTO::fromRequest($request, Auth::user());
         $response = $this->service->createUserTransaction($dto);
@@ -68,7 +70,7 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function edit(Request $request): RedirectResponse
+    public function edit(UpdateTransactionRequest $request): RedirectResponse
     {
         $user = Auth::user();
         

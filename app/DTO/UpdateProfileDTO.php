@@ -10,28 +10,33 @@ class UpdateProfileDTO
     public function __construct(
         public readonly int $id,
         public readonly string $name,
-        public readonly string $email
+        public readonly string $email,
+        public readonly ?string $password
     ) {}
 
     public static function fromRequest(Request $request, User $user): self
     {
-        $validated = $request->validate([
-            'name'  => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        ]);
-
+        $validated = $request->validated();
+        
         return new self(
             id: $user->id,
             name: $validated['name'],
-            email: $validated['email']
+            email: $validated['email'],
+            password: isset($validated['password']) ? bcrypt($validated['password']) : null
         );
     }
 
     public function toArray(): array
     {
-        return [
+        $data = [
             'name'  => $this->name,
             'email' => $this->email
         ];
+        
+        if ($this->password) {
+            $data['password'] = $this->password;
+        }
+        
+        return $data;
     }
 }

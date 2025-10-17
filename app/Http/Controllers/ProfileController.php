@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\DTO\UpdateProfileDTO;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -36,7 +37,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function edit(Request $request): RedirectResponse
+    public function edit(UpdateProfileRequest $request): RedirectResponse
     {
         $dto = UpdateProfileDTO::fromRequest($request, Auth::user());
         $response = $this->service->updateUserProfile($dto);

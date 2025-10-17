@@ -18,21 +18,13 @@ class CreateTransactionDTO
 
     public static function fromRequest(Request $request, User $user)
     {
-        $validated = $request->validate([
-            'name'        => 'required|string|max:255',
-            'sum'         => 'required|numeric|min:1',
-            'type_id'     => 'required|integer',
-            'category_id' => 'required|integer',
-            'payment_id'  => 'required|integer',
-        ]);
-
         return new self(
-            name: $validated['name'],
-            sum: (float) $validated['sum'],
-            type_id: (int) $validated['type_id'],
+            name: $request->validated()['name'],
+            sum: (float) $request->validated()['sum'],
+            type_id: (int) $request->validated()['type_id'],
             user_id: $user->id,
-            category_id: (int) $validated['category_id'],
-            payment_id: (int) $validated['payment_id']
+            category_id: (int) $request->validated()['category_id'],
+            payment_id: (int) $request->validated()['payment_id']
         );
     }
 

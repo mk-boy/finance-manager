@@ -17,19 +17,12 @@ class CreateCategoryDTO
 
     public static function fromRequest(Request $request, User $user)
     {
-        $validated = $request->validate([
-            'name'        => 'required|string|max:255',
-            'type_id'     => 'required|integer',
-            'description' => 'nullable|string|max:255',
-            'tag_color'   => 'nullable|string|max:7',
-        ]);
-
         return new self(
-            name: $validated['name'],
-            type_id: (int) $validated['type_id'],
+            name: $request->validated()['name'],
+            type_id: (int) $request->validated()['type_id'],
             user_id: $user->id,
-            description: $validated['description'] ?? null,
-            tag_color: $validated['tag_color'] ?? null
+            description: $request->validated()['description'] ?? null,
+            tag_color: $request->validated()['tag_color'] ?? null
         );
     }
 

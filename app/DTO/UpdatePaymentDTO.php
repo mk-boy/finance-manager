@@ -15,18 +15,11 @@ class UpdatePaymentDTO
 
     public static function fromRequest(Request $request): self
     {
-        $validated = $request->validate([
-            'payment_id'  => 'required|integer',
-            'name'        => 'required|string|max:255',
-            'type_id'     => 'required|integer',
-            'currency_id' => 'required|integer'
-        ]);
-
         return new self(
-            id: (int) $validated['payment_id'],
-            name: $validated['name'],
-            type_id: (int) $validated['type_id'],
-            currency_id: (int) $validated['currency_id']
+            id: (int) $request->validated()['payment_id'],
+            name: $request->validated()['name'],
+            type_id: (int) $request->validated()['type_id'],
+            currency_id: (int) $request->validated()['currency_id']
         );
     }
 
